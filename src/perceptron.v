@@ -1,4 +1,7 @@
 module perceptron (
+    input enable,
+    input reset,
+
     input signed [15:0] input_0,
     input signed [15:0] input_1,
     input signed [15:0] input_2,
@@ -104,7 +107,8 @@ module perceptron (
     output signed [32:0] classification
 );
 
-    wire signed [31:0] sum;
+    wire signed [32:0] sum;
+    reg  signed [15:0] output_register;
 
     wire signed [31:0] multi_0;
     wire signed [31:0] multi_1;
@@ -210,7 +214,21 @@ module perceptron (
 
     assign sum = multi_0 + multi_1 + multi_2 + multi_3 + multi_4 + multi_5 + multi_6 + multi_7 + multi_8 + multi_9 + multi_10 + multi_11 + multi_12 + multi_13 + multi_14 + multi_15 + multi_16 + multi_17 + multi_18 + multi_19 + multi_20 + multi_21 + multi_22 + multi_23 + multi_24 + multi_25 + multi_26 + multi_27 + multi_28 + multi_29 + multi_30 + multi_31 + multi_32 + multi_33 + multi_34 + multi_35 + multi_36 + multi_37 + multi_38 + multi_39 + multi_40 + multi_41 + multi_42 + multi_43 + multi_44 + multi_45 + multi_46 + multi_47 + multi_48 + multi_49;
 
-     // ReLU function: y = max(0, x)
-    assign classification = (sum > 0) ? sum : 16'b0;
+    always @ (posedge enable or posedge reset)
+    begin: Output_Register_process
+        if (reset == 1'b1) begin
+            output_register <= 0;
+        end
+        else begin
+            if (sum > 0) begin
+                output_register <= sum;
+            end
+            else begin
+                output_register <= 0;
+            end
+        end
+    end // Output_Register_process
 
+    // Assignment Statements
+    assign classification = output_register;
 endmodule

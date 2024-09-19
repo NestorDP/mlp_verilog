@@ -104,7 +104,7 @@ module perceptron_tb;
     reg signed [15:0] coeef_49;
 
     // Output
-    wire signed [32:0] sum;
+    wire signed [32:0] classification;
 
     // Instantiate the Perceptron module
     perceptron uut (
@@ -210,7 +210,7 @@ module perceptron_tb;
         .coeef_48(coeef_48),
         .coeef_49(coeef_49),
 
-        .sum(sum)
+        .classification(classification)
     );
 
     initial begin
@@ -321,7 +321,7 @@ module perceptron_tb;
         #100;
 
         // Display the output
-        $display("Output: %d", sum);
+        $display("Output: %d", classification);
 
         // Finish the simulation
         $finish;
