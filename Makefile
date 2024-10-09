@@ -58,7 +58,7 @@ $(TB_TOP)_snapshot.wdb : .elab.timestamp
 
 .PHONY : clean
 clean :
-	rm -rf *.jou *.log *.pb *.wdb xsim.dir
+	rm -rf *.jou *.log *.pb *.wdb xsim.dir *.str
 	rm -rf .*.timestamp .Xil
 
 #==== Subtractor type marker generation ===#
