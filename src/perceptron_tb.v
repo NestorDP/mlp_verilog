@@ -139,7 +139,7 @@ module perceptron_tb;
 
         // Display the inputs
         for (i = 0; i < 51; i = i + 1) begin
-            $display("%d -> coeef %b %d %f \tInputs: %b %d %f", i, coeef[i], coeef[i], coeef[i]/32768.0, inputs[i], inputs[i], inputs[i]/32768.0);
+            $display("%d -> coeef %h %d %f \tInputs: %h %d %f", i, coeef[i], coeef[i], coeef[i]/32768.0, inputs[i], inputs[i], inputs[i]/32768.0);
             // $display("%f \t%f",coeef[i]/32768.0, inputs[i]/32768.0);
         end
 
@@ -158,7 +158,7 @@ module perceptron_tb;
         enable = 0;
 
         // Display the output
-        $display("Output: %b %d %f", out, out, out/32768.0);
+        $display("Output: %h %d %f", out, out, out/32768.0);
 
         // Finish the simulation
         $finish;
