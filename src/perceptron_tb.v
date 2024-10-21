@@ -3,14 +3,12 @@ module perceptron_tb;
     // Inputs
     reg enable;
     reg reset;
+    reg signed [15:0] bias;
     reg signed [15:0] inputs [0:49];
     reg signed [15:0] coeef [0:50];
 
     // Output
     wire signed [15:0] out;
-    wire signed [37:0] sum_out;
-    wire signed [31:0] normalized_sum_out;
-
 
     integer i;
 
@@ -123,9 +121,6 @@ module perceptron_tb;
         .coeff_48(coeef[48]),
         .coeff_49(coeef[49]),
 
-        .sum_out(sum_out),
-        .normalized_sum_out(normalized_sum_out),
-
         .out(out)
     );
 
@@ -142,7 +137,6 @@ module perceptron_tb;
         // Display the inputs
         for (i = 0; i < 51; i = i + 1) begin
             $display("%d -> coeef %h %d %f \tInputs: %h %d %f", i, coeef[i], coeef[i], coeef[i]/32768.0, inputs[i], inputs[i], inputs[i]/32768.0);
-            // $display("%f \t%f",coeef[i]/32768.0, inputs[i]/32768.0);
         end
 
         // Generate a positive impulse on reset
@@ -160,8 +154,6 @@ module perceptron_tb;
         enable = 0;
 
         // Display the output
-        $display("Sum Output: %h %d %f", sum_out, sum_out, sum_out/1073741824.0);
-        $display("Normalized sum output: %h %d %f", normalized_sum_out, normalized_sum_out, normalized_sum_out/1073741824.0);
         $display("Output: %h %d %f", out, out, out/32768.0);
 
         // Finish the simulation

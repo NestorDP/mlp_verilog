@@ -108,10 +108,6 @@ module perceptron (
     input signed [15:0] coeff_48,
     input signed [15:0] coeff_49,
 
-    output signed [37:0] sum_out, // Output in Q7.30 format;
-    output signed [31:0] normalized_sum_out,
-
-
     // Output in Q15 format
     output signed [15:0] out
 );
@@ -167,6 +163,7 @@ module perceptron (
     wire signed [31:0] multi48;
     wire signed [31:0] multi49;
 
+    // Perform the multiplication of the inputs and coefficients
     assign multi0 = input_0 * coeff_0;
     assign multi1 = input_1 * coeff_1;
     assign multi2 = input_2 * coeff_2;
@@ -217,21 +214,79 @@ module perceptron (
     assign multi47 = input_47 * coeff_47;
     assign multi48 = input_48 * coeff_48;
     assign multi49 = input_49 * coeff_49;
-   
 
-    reg  signed [15:0] output_register;
-    wire signed [15:0] output_typeconvert;
+    reg  signed [15:0] output_register;     //Q15 format
+    wire signed [15:0] output_typeconvert;  //Q15 format
 
-    wire signed [37:0] sum;  //Q7.30 format
+    wire signed [37:0] sum;                 //Q7.30 format
+    wire signed [68:0] normalized_sum;      //Q7.60 format
+
     localparam signed [15:0] reciprocal_50_q15 = 15'd655; // 1/50 in Q15 format
-    wire signed [68:0] normalized_sum;
 
-    assign sum = multi0 + multi1 + multi2 + multi3 + multi4 + multi5 + multi6 + multi7 + multi8 + multi9 + multi10 + multi11 + multi12 + multi13 + multi14 + multi15 + multi16 + multi17 + multi18 + multi19 + multi20 + multi21 + multi22 + multi23 + multi24 + multi25 + multi26 + multi27 + multi28 + multi29 + multi30 + multi31 + multi32 + multi33 + multi34 + multi35 + multi36 + multi37 + multi38 + multi39 + multi40 + multi41 + multi42 + multi43 + multi44 + multi45 + multi46 + multi47 + multi48 + multi49;
-    assign sum_out = sum;
+    wire signed [31:0] bias_q15_to_q30;     // Q30 format
 
+    // Shift the bias value left by 15 bits to convert it to Q30
+    assign bias_q15_to_q30 = bias <<< 15;
+
+    // Sum all the multiplications and add the bias converted to Q30
+    assign sum = multi0 +
+                 multi1 +
+                 multi2 +
+                 multi3 +
+                 multi4 +
+                 multi5 +
+                 multi6 +
+                 multi7 +
+                 multi8 +
+                 multi9 +
+                 multi10 +
+                 multi11 +
+                 multi12 +
+                 multi13 +
+                 multi14 +
+                 multi15 +
+                 multi16 +
+                 multi17 +
+                 multi18 +
+                 multi19 +
+                 multi20 +
+                 multi21 +
+                 multi22 +
+                 multi23 +
+                 multi24 +
+                 multi25 +
+                 multi26 +
+                 multi27 +
+                 multi28 +
+                 multi29 +
+                 multi30 +
+                 multi31 +
+                 multi32 +
+                 multi33 +
+                 multi34 +
+                 multi35 +
+                 multi36 +
+                 multi37 +
+                 multi38 +
+                 multi39 +
+                 multi40 +
+                 multi41 +
+                 multi42 +
+                 multi43 +
+                 multi44 +
+                 multi45 +
+                 multi46 +
+                 multi47 +
+                 multi48 +
+                 multi49 + bias_q15_to_q30;
+
+    // Normalize the sum by multiplying it by 1/50, 
+    // wich is the same than dividing by 50. 
+    // The result is in Q7.60 format
+    // TODO: normalize by 51 instead of 50
     assign normalized_sum = sum * reciprocal_50_q15;
-    assign normalized_sum_out = normalized_sum >>> 15;
 
+    // Convert the normalized sum to Q15 format
     assign output_typeconvert = normalized_sum >>> 30;
 
     always @ (posedge enable or posedge reset)
