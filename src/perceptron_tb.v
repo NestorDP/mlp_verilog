@@ -8,7 +8,7 @@ module perceptron_tb;
     reg signed [15:0] coeef [0:50];
 
     // Output
-    wire signed [15:0] out;
+    wire signed [22:0] out;
 
     integer i;
 
