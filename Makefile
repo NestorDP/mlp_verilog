@@ -3,7 +3,7 @@
 # www.itsembedded.com
 
 
-TB_TOP := perceptron_tb
+TB_TOP := mlp_tb
 
 
 COMP_OPTS  = --incr

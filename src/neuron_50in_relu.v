@@ -1,4 +1,4 @@
-module perceptron (
+module neuron_50in_relu (
     input enable,
     input reset,
 
@@ -57,56 +57,56 @@ module perceptron (
     input signed [15:0] input_49,
 
     // 50 coefficients in Q15 format
-    input signed [15:0] coeff_0,
-    input signed [15:0] coeff_1,
-    input signed [15:0] coeff_2,
-    input signed [15:0] coeff_3,
-    input signed [15:0] coeff_4,
-    input signed [15:0] coeff_5,
-    input signed [15:0] coeff_6,
-    input signed [15:0] coeff_7,
-    input signed [15:0] coeff_8,
-    input signed [15:0] coeff_9,
-    input signed [15:0] coeff_10,
-    input signed [15:0] coeff_11,
-    input signed [15:0] coeff_12,
-    input signed [15:0] coeff_13,
-    input signed [15:0] coeff_14,
-    input signed [15:0] coeff_15,
-    input signed [15:0] coeff_16,
-    input signed [15:0] coeff_17,
-    input signed [15:0] coeff_18,
-    input signed [15:0] coeff_19,
-    input signed [15:0] coeff_20,
-    input signed [15:0] coeff_21,
-    input signed [15:0] coeff_22,
-    input signed [15:0] coeff_23,
-    input signed [15:0] coeff_24,
-    input signed [15:0] coeff_25,
-    input signed [15:0] coeff_26,
-    input signed [15:0] coeff_27,
-    input signed [15:0] coeff_28,
-    input signed [15:0] coeff_29,
-    input signed [15:0] coeff_30,
-    input signed [15:0] coeff_31,
-    input signed [15:0] coeff_32,
-    input signed [15:0] coeff_33,
-    input signed [15:0] coeff_34,
-    input signed [15:0] coeff_35,
-    input signed [15:0] coeff_36,
-    input signed [15:0] coeff_37,
-    input signed [15:0] coeff_38,
-    input signed [15:0] coeff_39,
-    input signed [15:0] coeff_40,
-    input signed [15:0] coeff_41,
-    input signed [15:0] coeff_42,
-    input signed [15:0] coeff_43,
-    input signed [15:0] coeff_44,
-    input signed [15:0] coeff_45,
-    input signed [15:0] coeff_46,
-    input signed [15:0] coeff_47,
-    input signed [15:0] coeff_48,
-    input signed [15:0] coeff_49,
+    input signed [15:0] weight_0,
+    input signed [15:0] weight_1,
+    input signed [15:0] weight_2,
+    input signed [15:0] weight_3,
+    input signed [15:0] weight_4,
+    input signed [15:0] weight_5,
+    input signed [15:0] weight_6,
+    input signed [15:0] weight_7,
+    input signed [15:0] weight_8,
+    input signed [15:0] weight_9,
+    input signed [15:0] weight_10,
+    input signed [15:0] weight_11,
+    input signed [15:0] weight_12,
+    input signed [15:0] weight_13,
+    input signed [15:0] weight_14,
+    input signed [15:0] weight_15,
+    input signed [15:0] weight_16,
+    input signed [15:0] weight_17,
+    input signed [15:0] weight_18,
+    input signed [15:0] weight_19,
+    input signed [15:0] weight_20,
+    input signed [15:0] weight_21,
+    input signed [15:0] weight_22,
+    input signed [15:0] weight_23,
+    input signed [15:0] weight_24,
+    input signed [15:0] weight_25,
+    input signed [15:0] weight_26,
+    input signed [15:0] weight_27,
+    input signed [15:0] weight_28,
+    input signed [15:0] weight_29,
+    input signed [15:0] weight_30,
+    input signed [15:0] weight_31,
+    input signed [15:0] weight_32,
+    input signed [15:0] weight_33,
+    input signed [15:0] weight_34,
+    input signed [15:0] weight_35,
+    input signed [15:0] weight_36,
+    input signed [15:0] weight_37,
+    input signed [15:0] weight_38,
+    input signed [15:0] weight_39,
+    input signed [15:0] weight_40,
+    input signed [15:0] weight_41,
+    input signed [15:0] weight_42,
+    input signed [15:0] weight_43,
+    input signed [15:0] weight_44,
+    input signed [15:0] weight_45,
+    input signed [15:0] weight_46,
+    input signed [15:0] weight_47,
+    input signed [15:0] weight_48,
+    input signed [15:0] weight_49,
 
     // Output in Q15 format
     output signed [22:0] out
@@ -164,56 +164,56 @@ module perceptron (
     wire signed [31:0] multi49;
 
     // Perform the multiplication of the inputs and coefficients
-    assign multi0 = input_0 * coeff_0;
-    assign multi1 = input_1 * coeff_1;
-    assign multi2 = input_2 * coeff_2;
-    assign multi3 = input_3 * coeff_3;
-    assign multi4 = input_4 * coeff_4;
-    assign multi5 = input_5 * coeff_5;
-    assign multi6 = input_6 * coeff_6;
-    assign multi7 = input_7 * coeff_7;
-    assign multi8 = input_8 * coeff_8;
-    assign multi9 = input_9 * coeff_9;
-    assign multi10 = input_10 * coeff_10;
-    assign multi11 = input_11 * coeff_11;
-    assign multi12 = input_12 * coeff_12;
-    assign multi13 = input_13 * coeff_13;
-    assign multi14 = input_14 * coeff_14;
-    assign multi15 = input_15 * coeff_15;
-    assign multi16 = input_16 * coeff_16;
-    assign multi17 = input_17 * coeff_17;
-    assign multi18 = input_18 * coeff_18;
-    assign multi19 = input_19 * coeff_19;
-    assign multi20 = input_20 * coeff_20;
-    assign multi21 = input_21 * coeff_21;
-    assign multi22 = input_22 * coeff_22;
-    assign multi23 = input_23 * coeff_23;
-    assign multi24 = input_24 * coeff_24;
-    assign multi25 = input_25 * coeff_25;
-    assign multi26 = input_26 * coeff_26;
-    assign multi27 = input_27 * coeff_27;
-    assign multi28 = input_28 * coeff_28;
-    assign multi29 = input_29 * coeff_29;
-    assign multi30 = input_30 * coeff_30;
-    assign multi31 = input_31 * coeff_31;
-    assign multi32 = input_32 * coeff_32;
-    assign multi33 = input_33 * coeff_33;
-    assign multi34 = input_34 * coeff_34;
-    assign multi35 = input_35 * coeff_35;
-    assign multi36 = input_36 * coeff_36;
-    assign multi37 = input_37 * coeff_37;
-    assign multi38 = input_38 * coeff_38;
-    assign multi39 = input_39 * coeff_39;
-    assign multi40 = input_40 * coeff_40;
-    assign multi41 = input_41 * coeff_41;
-    assign multi42 = input_42 * coeff_42;
-    assign multi43 = input_43 * coeff_43;
-    assign multi44 = input_44 * coeff_44;
-    assign multi45 = input_45 * coeff_45;
-    assign multi46 = input_46 * coeff_46;
-    assign multi47 = input_47 * coeff_47;
-    assign multi48 = input_48 * coeff_48;
-    assign multi49 = input_49 * coeff_49;
+    assign multi0 = input_0 * weight_0;
+    assign multi1 = input_1 * weight_1;
+    assign multi2 = input_2 * weight_2;
+    assign multi3 = input_3 * weight_3;
+    assign multi4 = input_4 * weight_4;
+    assign multi5 = input_5 * weight_5;
+    assign multi6 = input_6 * weight_6;
+    assign multi7 = input_7 * weight_7;
+    assign multi8 = input_8 * weight_8;
+    assign multi9 = input_9 * weight_9;
+    assign multi10 = input_10 * weight_10;
+    assign multi11 = input_11 * weight_11;
+    assign multi12 = input_12 * weight_12;
+    assign multi13 = input_13 * weight_13;
+    assign multi14 = input_14 * weight_14;
+    assign multi15 = input_15 * weight_15;
+    assign multi16 = input_16 * weight_16;
+    assign multi17 = input_17 * weight_17;
+    assign multi18 = input_18 * weight_18;
+    assign multi19 = input_19 * weight_19;
+    assign multi20 = input_20 * weight_20;
+    assign multi21 = input_21 * weight_21;
+    assign multi22 = input_22 * weight_22;
+    assign multi23 = input_23 * weight_23;
+    assign multi24 = input_24 * weight_24;
+    assign multi25 = input_25 * weight_25;
+    assign multi26 = input_26 * weight_26;
+    assign multi27 = input_27 * weight_27;
+    assign multi28 = input_28 * weight_28;
+    assign multi29 = input_29 * weight_29;
+    assign multi30 = input_30 * weight_30;
+    assign multi31 = input_31 * weight_31;
+    assign multi32 = input_32 * weight_32;
+    assign multi33 = input_33 * weight_33;
+    assign multi34 = input_34 * weight_34;
+    assign multi35 = input_35 * weight_35;
+    assign multi36 = input_36 * weight_36;
+    assign multi37 = input_37 * weight_37;
+    assign multi38 = input_38 * weight_38;
+    assign multi39 = input_39 * weight_39;
+    assign multi40 = input_40 * weight_40;
+    assign multi41 = input_41 * weight_41;
+    assign multi42 = input_42 * weight_42;
+    assign multi43 = input_43 * weight_43;
+    assign multi44 = input_44 * weight_44;
+    assign multi45 = input_45 * weight_45;
+    assign multi46 = input_46 * weight_46;
+    assign multi47 = input_47 * weight_47;
+    assign multi48 = input_48 * weight_48;
+    assign multi49 = input_49 * weight_49;
 
     reg  signed [22:0] output_register;     //Q7.15 format
     wire signed [22:0] output_typeconvert;  //Q7.15 format

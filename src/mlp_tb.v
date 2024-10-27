@@ -1,4 +1,4 @@
-module perceptron_tb;
+module mlp_tb;
 
     // Inputs
     reg enable;
