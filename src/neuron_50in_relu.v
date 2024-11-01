@@ -279,7 +279,7 @@ module neuron_50in_relu (
     // Convert the sum to Q15 format
     assign output_typeconvert = sum >>> 15;
 
-    always @ (posedge enable or posedge reset)
+    always @ (posedge clock or posedge reset)
     begin: Output_Register_process
         if (reset == 1'b1) begin
             output_register <= 0;

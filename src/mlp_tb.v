@@ -5,9 +5,9 @@ module mlp_tb;
     reg reset;
     reg weight_enable;
 
-    reg signed [7:0] address
+    reg signed [7:0] address;
     reg signed [15:0] inputs [0:49];
-    reg signed [15:0] weights;
+    reg signed [15:0] weight;
 
     // Output
     wire signed [22:0] out;
@@ -19,7 +19,7 @@ module mlp_tb;
         .weight_enable(weight_enable),
 
         .address(address),
-        .weights(weights),
+        .weight(weight),
 
         .input_0(inputs[0]),
         .input_1(inputs[1]),
@@ -76,21 +76,18 @@ module mlp_tb;
     );
 
     integer i;
+    reg signed [15:0] weights [0:50];
 
     initial begin
         // Initialize Inputs
 
-        enable = 0;
+        weight_enable = 1;
+        clock = 0;
         reset = 0;
         #10;
 
         $readmemb("input_values.mem", inputs);
-        $readmemb("weights_values.mem", coeef);
-
-        // Display the inputs
-        for (i = 0; i < 51; i = i + 1) begin
-            $display("%d -> coeef %h %d %f \tInputs: %h %d %f", i, coeef[i], coeef[i], coeef[i]/32768.0, inputs[i], inputs[i], inputs[i]/32768.0);
-        end
+        $readmemb("weights_values.mem", weights);
 
         // Generate a positive impulse on reset
         reset = 1;
@@ -98,13 +95,29 @@ module mlp_tb;
         reset = 0;
         #10; 
 
-        // Wait for the perceptron to process the inputs
-        #200;
+        // Display the inputs
+        for (i = 0; i < 51; i = i + 1) begin
+            $display("%d -> Weights %h %d %f \tInputs: %h %d %f", i, weights[i], weights[i], weights[i]/32768.0, inputs[i], inputs[i], inputs[i]/32768.0);
+        end
 
-        // Generate a positive impulse on enable
-        enable = 1; 
+        // Initialize weights
+        
+        for (i = 0; i <= 51; i = i + 1) begin
+            weight_enable = 0;
+            address = i;
+            weight = weights[i];
+            #5;
+            weight_enable = 1;
+            #10;
+        end
+
+        // Wait for the perceptron to process the inputs
+        #500;
+
+        // Generate a positive impulse on clock
+        clock = 1; 
         #10; 
-        enable = 0;
+        clock = 0;
 
         // Display the output
         $display("Output: %h %d %f", out, out, out/32768.0);
