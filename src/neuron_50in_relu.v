@@ -1,5 +1,5 @@
 module neuron_50in_relu (
-    input enable,
+    input clock,
     input reset,
 
     input signed [15:0] bias,

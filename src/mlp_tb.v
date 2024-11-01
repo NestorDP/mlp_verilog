@@ -1,24 +1,26 @@
 module mlp_tb;
 
     // Inputs
-    reg enable;
+    reg clock;
     reg reset;
-    reg signed [15:0] bias;
+    reg weight_enable;
+
+    reg signed [7:0] address
     reg signed [15:0] inputs [0:49];
-    reg signed [15:0] coeef [0:50];
+    reg signed [15:0] weights;
 
     // Output
     wire signed [22:0] out;
 
-    integer i;
-
     // Instantiate the Perceptron module
-    perceptron uut (
+    mlp uut (
         .reset(reset),
-        .enable(enable),
+        .clock(clock),
+        .weight_enable(weight_enable),
 
-        .bias(coeef[50]),
-        
+        .address(address),
+        .weights(weights),
+
         .input_0(inputs[0]),
         .input_1(inputs[1]),
         .input_2(inputs[2]),
@@ -70,59 +72,10 @@ module mlp_tb;
         .input_48(inputs[48]),
         .input_49(inputs[49]),
 
-        .coeff_0(coeef[0]),
-        .coeff_1(coeef[1]),
-        .coeff_2(coeef[2]),
-        .coeff_3(coeef[3]),
-        .coeff_4(coeef[4]),
-        .coeff_5(coeef[5]),
-        .coeff_6(coeef[6]),
-        .coeff_7(coeef[7]),
-        .coeff_8(coeef[8]),
-        .coeff_9(coeef[9]),
-        .coeff_10(coeef[10]),
-        .coeff_11(coeef[11]),
-        .coeff_12(coeef[12]),
-        .coeff_13(coeef[13]),
-        .coeff_14(coeef[14]),
-        .coeff_15(coeef[15]),
-        .coeff_16(coeef[16]),
-        .coeff_17(coeef[17]),
-        .coeff_18(coeef[18]),
-        .coeff_19(coeef[19]),
-        .coeff_20(coeef[20]),
-        .coeff_21(coeef[21]),
-        .coeff_22(coeef[22]),
-        .coeff_23(coeef[23]),
-        .coeff_24(coeef[24]),
-        .coeff_25(coeef[25]),
-        .coeff_26(coeef[26]),
-        .coeff_27(coeef[27]),
-        .coeff_28(coeef[28]),
-        .coeff_29(coeef[29]),
-        .coeff_30(coeef[30]),
-        .coeff_31(coeef[31]),
-        .coeff_32(coeef[32]),
-        .coeff_33(coeef[33]),
-        .coeff_34(coeef[34]),
-        .coeff_35(coeef[35]),
-        .coeff_36(coeef[36]),
-        .coeff_37(coeef[37]),
-        .coeff_38(coeef[38]),
-        .coeff_39(coeef[39]),
-        .coeff_40(coeef[40]),
-        .coeff_41(coeef[41]),
-        .coeff_42(coeef[42]),
-        .coeff_43(coeef[43]),
-        .coeff_44(coeef[44]),
-        .coeff_45(coeef[45]),
-        .coeff_46(coeef[46]),
-        .coeff_47(coeef[47]),
-        .coeff_48(coeef[48]),
-        .coeff_49(coeef[49]),
-
         .out(out)
     );
+
+    integer i;
 
     initial begin
         // Initialize Inputs
