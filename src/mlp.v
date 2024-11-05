@@ -61,107 +61,113 @@ module mlp (
     output signed [22:0] out
 );
 
-    wire signed [15:0] WIRE_0;
-    wire signed [15:0] WIRE_1;
-    wire signed [15:0] WIRE_2;
-    wire signed [15:0] WIRE_3;
-    wire signed [15:0] WIRE_4;
-    wire signed [15:0] WIRE_5;
-    wire signed [15:0] WIRE_6;
-    wire signed [15:0] WIRE_7;
-    wire signed [15:0] WIRE_8;
-    wire signed [15:0] WIRE_9;
-    wire signed [15:0] WIRE_10;
-    wire signed [15:0] WIRE_11;
-    wire signed [15:0] WIRE_12;
-    wire signed [15:0] WIRE_13;
-    wire signed [15:0] WIRE_14;
-    wire signed [15:0] WIRE_15;
-    wire signed [15:0] WIRE_16;
-    wire signed [15:0] WIRE_17;
-    wire signed [15:0] WIRE_18;
-    wire signed [15:0] WIRE_19;
-    wire signed [15:0] WIRE_20;
-    wire signed [15:0] WIRE_21;
-    wire signed [15:0] WIRE_22;
-    wire signed [15:0] WIRE_23;
-    wire signed [15:0] WIRE_24;
-    wire signed [15:0] WIRE_25;
-    wire signed [15:0] WIRE_26;
-    wire signed [15:0] WIRE_27;
-    wire signed [15:0] WIRE_28;
-    wire signed [15:0] WIRE_29;
-    wire signed [15:0] WIRE_30;
-    wire signed [15:0] WIRE_31;
-    wire signed [15:0] WIRE_32;
-    wire signed [15:0] WIRE_33;
-    wire signed [15:0] WIRE_34;
-    wire signed [15:0] WIRE_35;
-    wire signed [15:0] WIRE_36;
-    wire signed [15:0] WIRE_37;
-    wire signed [15:0] WIRE_38;
-    wire signed [15:0] WIRE_39;
-    wire signed [15:0] WIRE_40;
-    wire signed [15:0] WIRE_41;
-    wire signed [15:0] WIRE_42;
-    wire signed [15:0] WIRE_43;
-    wire signed [15:0] WIRE_44;
-    wire signed [15:0] WIRE_45;
-    wire signed [15:0] WIRE_46;
-    wire signed [15:0] WIRE_47;
-    wire signed [15:0] WIRE_48;
-    wire signed [15:0] WIRE_49;
+    wire signed [15:0] INPUT_WIRE_0;
+    wire signed [15:0] INPUT_WIRE_1;
+    wire signed [15:0] INPUT_WIRE_2;
+    wire signed [15:0] INPUT_WIRE_3;
+    wire signed [15:0] INPUT_WIRE_4;
+    wire signed [15:0] INPUT_WIRE_5;
+    wire signed [15:0] INPUT_WIRE_6;
+    wire signed [15:0] INPUT_WIRE_7;
+    wire signed [15:0] INPUT_WIRE_8;
+    wire signed [15:0] INPUT_WIRE_9;
+    wire signed [15:0] INPUT_WIRE_10;
+    wire signed [15:0] INPUT_WIRE_11;
+    wire signed [15:0] INPUT_WIRE_12;
+    wire signed [15:0] INPUT_WIRE_13;
+    wire signed [15:0] INPUT_WIRE_14;
+    wire signed [15:0] INPUT_WIRE_15;
+    wire signed [15:0] INPUT_WIRE_16;
+    wire signed [15:0] INPUT_WIRE_17;
+    wire signed [15:0] INPUT_WIRE_18;
+    wire signed [15:0] INPUT_WIRE_19;
+    wire signed [15:0] INPUT_WIRE_20;
+    wire signed [15:0] INPUT_WIRE_21;
+    wire signed [15:0] INPUT_WIRE_22;
+    wire signed [15:0] INPUT_WIRE_23;
+    wire signed [15:0] INPUT_WIRE_24;
+    wire signed [15:0] INPUT_WIRE_25;
+    wire signed [15:0] INPUT_WIRE_26;
+    wire signed [15:0] INPUT_WIRE_27;
+    wire signed [15:0] INPUT_WIRE_28;
+    wire signed [15:0] INPUT_WIRE_29;
+    wire signed [15:0] INPUT_WIRE_30;
+    wire signed [15:0] INPUT_WIRE_31;
+    wire signed [15:0] INPUT_WIRE_32;
+    wire signed [15:0] INPUT_WIRE_33;
+    wire signed [15:0] INPUT_WIRE_34;
+    wire signed [15:0] INPUT_WIRE_35;
+    wire signed [15:0] INPUT_WIRE_36;
+    wire signed [15:0] INPUT_WIRE_37;
+    wire signed [15:0] INPUT_WIRE_38;
+    wire signed [15:0] INPUT_WIRE_39;
+    wire signed [15:0] INPUT_WIRE_40;
+    wire signed [15:0] INPUT_WIRE_41;
+    wire signed [15:0] INPUT_WIRE_42;
+    wire signed [15:0] INPUT_WIRE_43;
+    wire signed [15:0] INPUT_WIRE_44;
+    wire signed [15:0] INPUT_WIRE_45;
+    wire signed [15:0] INPUT_WIRE_46;
+    wire signed [15:0] INPUT_WIRE_47;
+    wire signed [15:0] INPUT_WIRE_48;
+    wire signed [15:0] INPUT_WIRE_49;
 
-    assign WIRE_0 = input_0;
-    assign WIRE_1 = input_1;
-    assign WIRE_2 = input_2;
-    assign WIRE_3 = input_3;
-    assign WIRE_4 = input_4;
-    assign WIRE_5 = input_5;
-    assign WIRE_6 = input_6;
-    assign WIRE_7 = input_7;
-    assign WIRE_8 = input_8;
-    assign WIRE_9 = input_9;
-    assign WIRE_10 = input_10;
-    assign WIRE_11 = input_11;
-    assign WIRE_12 = input_12;
-    assign WIRE_13 = input_13;
-    assign WIRE_14 = input_14;
-    assign WIRE_15 = input_15;
-    assign WIRE_16 = input_16;
-    assign WIRE_17 = input_17;
-    assign WIRE_18 = input_18;
-    assign WIRE_19 = input_19;
-    assign WIRE_20 = input_20;
-    assign WIRE_21 = input_21;
-    assign WIRE_22 = input_22;
-    assign WIRE_23 = input_23;
-    assign WIRE_24 = input_24;
-    assign WIRE_25 = input_25;
-    assign WIRE_26 = input_26;
-    assign WIRE_27 = input_27;
-    assign WIRE_28 = input_28;
-    assign WIRE_29 = input_29;
-    assign WIRE_30 = input_30;
-    assign WIRE_31 = input_31;
-    assign WIRE_32 = input_32;
-    assign WIRE_33 = input_33;
-    assign WIRE_34 = input_34;
-    assign WIRE_35 = input_35;
-    assign WIRE_36 = input_36;
-    assign WIRE_37 = input_37;
-    assign WIRE_38 = input_38;
-    assign WIRE_39 = input_39;
-    assign WIRE_40 = input_40;
-    assign WIRE_41 = input_41;
-    assign WIRE_42 = input_42;
-    assign WIRE_43 = input_43;
-    assign WIRE_44 = input_44;
-    assign WIRE_45 = input_45;
-    assign WIRE_46 = input_46;
-    assign WIRE_47 = input_47;
-    assign WIRE_48 = input_48;
-    assign WIRE_49 = input_49;
+    wire signed [15:0] HIDDEN_WIRE_0;
+    wire signed [15:0] HIDDEN_WIRE_1;
+    wire signed [15:0] HIDDEN_WIRE_2;
+    wire signed [15:0] HIDDEN_WIRE_3;
+    wire signed [15:0] HIDDEN_WIRE_4;
+
+    assign INPUT_WIRE_0 = input_0;
+    assign INPUT_WIRE_1 = input_1;
+    assign INPUT_WIRE_2 = input_2;
+    assign INPUT_WIRE_3 = input_3;
+    assign INPUT_WIRE_4 = input_4;
+    assign INPUT_WIRE_5 = input_5;
+    assign INPUT_WIRE_6 = input_6;
+    assign INPUT_WIRE_7 = input_7;
+    assign INPUT_WIRE_8 = input_8;
+    assign INPUT_WIRE_9 = input_9;
+    assign INPUT_WIRE_10 = input_10;
+    assign INPUT_WIRE_11 = input_11;
+    assign INPUT_WIRE_12 = input_12;
+    assign INPUT_WIRE_13 = input_13;
+    assign INPUT_WIRE_14 = input_14;
+    assign INPUT_WIRE_15 = input_15;
+    assign INPUT_WIRE_16 = input_16;
+    assign INPUT_WIRE_17 = input_17;
+    assign INPUT_WIRE_18 = input_18;
+    assign INPUT_WIRE_19 = input_19;
+    assign INPUT_WIRE_20 = input_20;
+    assign INPUT_WIRE_21 = input_21;
+    assign INPUT_WIRE_22 = input_22;
+    assign INPUT_WIRE_23 = input_23;
+    assign INPUT_WIRE_24 = input_24;
+    assign INPUT_WIRE_25 = input_25;
+    assign INPUT_WIRE_26 = input_26;
+    assign INPUT_WIRE_27 = input_27;
+    assign INPUT_WIRE_28 = input_28;
+    assign INPUT_WIRE_29 = input_29;
+    assign INPUT_WIRE_30 = input_30;
+    assign INPUT_WIRE_31 = input_31;
+    assign INPUT_WIRE_32 = input_32;
+    assign INPUT_WIRE_33 = input_33;
+    assign INPUT_WIRE_34 = input_34;
+    assign INPUT_WIRE_35 = input_35;
+    assign INPUT_WIRE_36 = input_36;
+    assign INPUT_WIRE_37 = input_37;
+    assign INPUT_WIRE_38 = input_38;
+    assign INPUT_WIRE_39 = input_39;
+    assign INPUT_WIRE_40 = input_40;
+    assign INPUT_WIRE_41 = input_41;
+    assign INPUT_WIRE_42 = input_42;
+    assign INPUT_WIRE_43 = input_43;
+    assign INPUT_WIRE_44 = input_44;
+    assign INPUT_WIRE_45 = input_45;
+    assign INPUT_WIRE_46 = input_46;
+    assign INPUT_WIRE_47 = input_47;
+    assign INPUT_WIRE_48 = input_48;
+    assign INPUT_WIRE_49 = input_49;
 
 
     // Reg neueons weight
@@ -680,8 +686,14 @@ module mlp (
                 251 : mlp_weight_251 = weight;
                 252 : mlp_weight_252 = weight;
                 253 : mlp_weight_253 = weight;
+                254 : mlp_weight_254 = weight;
+                255 : mlp_weight_255 = weight;
+                256 : mlp_weight_256 = weight;
+                257 : mlp_weight_257 = weight;
+                258 : mlp_weight_258 = weight;
+                259 : mlp_weight_259 = weight;
 
-				default : mlp_weight_254 = weight;
+				default : mlp_weight_260 = weight;
 			endcase
 		end
 	end
@@ -690,56 +702,56 @@ module mlp (
     neuron_50in_relu U1 (
         .clock(clock),
         .reset(reset),
-        .input_0(WIRE_0),
-        .input_1(WIRE_1),
-        .input_2(WIRE_2),
-        .input_3(WIRE_3),
-        .input_4(WIRE_4),
-        .input_5(WIRE_5),
-        .input_6(WIRE_6),
-        .input_7(WIRE_7),
-        .input_8(WIRE_8),
-        .input_9(WIRE_9),
-        .input_10(WIRE_10),
-        .input_11(WIRE_11),
-        .input_12(WIRE_12),
-        .input_13(WIRE_13),
-        .input_14(WIRE_14),
-        .input_15(WIRE_15),
-        .input_16(WIRE_16),
-        .input_17(WIRE_17),
-        .input_18(WIRE_18),
-        .input_19(WIRE_19),
-        .input_20(WIRE_20),
-        .input_21(WIRE_21),
-        .input_22(WIRE_22),
-        .input_23(WIRE_23),
-        .input_24(WIRE_24),
-        .input_25(WIRE_25),
-        .input_26(WIRE_26),
-        .input_27(WIRE_27),
-        .input_28(WIRE_28),
-        .input_29(WIRE_29),
-        .input_30(WIRE_30),
-        .input_31(WIRE_31),
-        .input_32(WIRE_32),
-        .input_33(WIRE_33),
-        .input_34(WIRE_34),
-        .input_35(WIRE_35),
-        .input_36(WIRE_36),
-        .input_37(WIRE_37),
-        .input_38(WIRE_38),
-        .input_39(WIRE_39),
-        .input_40(WIRE_40),
-        .input_41(WIRE_41),
-        .input_42(WIRE_42),
-        .input_43(WIRE_43),
-        .input_44(WIRE_44),
-        .input_45(WIRE_45),
-        .input_46(WIRE_46),
-        .input_47(WIRE_47),
-        .input_48(WIRE_48),
-        .input_49(WIRE_49),
+        .input_0(INPUT_WIRE_0),
+        .input_1(INPUT_WIRE_1),
+        .input_2(INPUT_WIRE_2),
+        .input_3(INPUT_WIRE_3),
+        .input_4(INPUT_WIRE_4),
+        .input_5(INPUT_WIRE_5),
+        .input_6(INPUT_WIRE_6),
+        .input_7(INPUT_WIRE_7),
+        .input_8(INPUT_WIRE_8),
+        .input_9(INPUT_WIRE_9),
+        .input_10(INPUT_WIRE_10),
+        .input_11(INPUT_WIRE_11),
+        .input_12(INPUT_WIRE_12),
+        .input_13(INPUT_WIRE_13),
+        .input_14(INPUT_WIRE_14),
+        .input_15(INPUT_WIRE_15),
+        .input_16(INPUT_WIRE_16),
+        .input_17(INPUT_WIRE_17),
+        .input_18(INPUT_WIRE_18),
+        .input_19(INPUT_WIRE_19),
+        .input_20(INPUT_WIRE_20),
+        .input_21(INPUT_WIRE_21),
+        .input_22(INPUT_WIRE_22),
+        .input_23(INPUT_WIRE_23),
+        .input_24(INPUT_WIRE_24),
+        .input_25(INPUT_WIRE_25),
+        .input_26(INPUT_WIRE_26),
+        .input_27(INPUT_WIRE_27),
+        .input_28(INPUT_WIRE_28),
+        .input_29(INPUT_WIRE_29),
+        .input_30(INPUT_WIRE_30),
+        .input_31(INPUT_WIRE_31),
+        .input_32(INPUT_WIRE_32),
+        .input_33(INPUT_WIRE_33),
+        .input_34(INPUT_WIRE_34),
+        .input_35(INPUT_WIRE_35),
+        .input_36(INPUT_WIRE_36),
+        .input_37(INPUT_WIRE_37),
+        .input_38(INPUT_WIRE_38),
+        .input_39(INPUT_WIRE_39),
+        .input_40(INPUT_WIRE_40),
+        .input_41(INPUT_WIRE_41),
+        .input_42(INPUT_WIRE_42),
+        .input_43(INPUT_WIRE_43),
+        .input_44(INPUT_WIRE_44),
+        .input_45(INPUT_WIRE_45),
+        .input_46(INPUT_WIRE_46),
+        .input_47(INPUT_WIRE_47),
+        .input_48(INPUT_WIRE_48),
+        .input_49(INPUT_WIRE_49),
 
         .weight_0(mlp_weight_0),
         .weight_1(mlp_weight_1),
@@ -791,7 +803,468 @@ module mlp (
         .weight_47(mlp_weight_47),
         .weight_48(mlp_weight_48),
         .weight_49(mlp_weight_49),
-        .bias(mlp_weight_50), 
+        .bias(mlp_weight_250), 
+
+        .out(HIDDEN_WIRE_0)
+    );
+
+    neuron_50in_relu U2 (
+        .clock(clock),
+        .reset(reset),
+        .input_0(INPUT_WIRE_0),
+        .input_1(INPUT_WIRE_1),
+        .input_2(INPUT_WIRE_2),
+        .input_3(INPUT_WIRE_3),
+        .input_4(INPUT_WIRE_4),
+        .input_5(INPUT_WIRE_5),
+        .input_6(INPUT_WIRE_6),
+        .input_7(INPUT_WIRE_7),
+        .input_8(INPUT_WIRE_8),
+        .input_9(INPUT_WIRE_9),
+        .input_10(INPUT_WIRE_10),
+        .input_11(INPUT_WIRE_11),
+        .input_12(INPUT_WIRE_12),
+        .input_13(INPUT_WIRE_13),
+        .input_14(INPUT_WIRE_14),
+        .input_15(INPUT_WIRE_15),
+        .input_16(INPUT_WIRE_16),
+        .input_17(INPUT_WIRE_17),
+        .input_18(INPUT_WIRE_18),
+        .input_19(INPUT_WIRE_19),
+        .input_20(INPUT_WIRE_20),
+        .input_21(INPUT_WIRE_21),
+        .input_22(INPUT_WIRE_22),
+        .input_23(INPUT_WIRE_23),
+        .input_24(INPUT_WIRE_24),
+        .input_25(INPUT_WIRE_25),
+        .input_26(INPUT_WIRE_26),
+        .input_27(INPUT_WIRE_27),
+        .input_28(INPUT_WIRE_28),
+        .input_29(INPUT_WIRE_29),
+        .input_30(INPUT_WIRE_30),
+        .input_31(INPUT_WIRE_31),
+        .input_32(INPUT_WIRE_32),
+        .input_33(INPUT_WIRE_33),
+        .input_34(INPUT_WIRE_34),
+        .input_35(INPUT_WIRE_35),
+        .input_36(INPUT_WIRE_36),
+        .input_37(INPUT_WIRE_37),
+        .input_38(INPUT_WIRE_38),
+        .input_39(INPUT_WIRE_39),
+        .input_40(INPUT_WIRE_40),
+        .input_41(INPUT_WIRE_41),
+        .input_42(INPUT_WIRE_42),
+        .input_43(INPUT_WIRE_43),
+        .input_44(INPUT_WIRE_44),
+        .input_45(INPUT_WIRE_45),
+        .input_46(INPUT_WIRE_46),
+        .input_47(INPUT_WIRE_47),
+        .input_48(INPUT_WIRE_48),
+        .input_49(INPUT_WIRE_49),
+
+        .weight_0(mlp_weight_50),
+        .weight_1(mlp_weight_51),
+        .weight_2(mlp_weight_52),
+        .weight_3(mlp_weight_53),
+        .weight_4(mlp_weight_54),
+        .weight_5(mlp_weight_55),
+        .weight_6(mlp_weight_56),
+        .weight_7(mlp_weight_57),
+        .weight_8(mlp_weight_58),
+        .weight_9(mlp_weight_59),
+        .weight_10(mlp_weight_60),
+        .weight_11(mlp_weight_61),
+        .weight_12(mlp_weight_62),
+        .weight_13(mlp_weight_63),
+        .weight_14(mlp_weight_64),
+        .weight_15(mlp_weight_65),
+        .weight_16(mlp_weight_66),
+        .weight_17(mlp_weight_67),
+        .weight_18(mlp_weight_68),
+        .weight_19(mlp_weight_69),
+        .weight_20(mlp_weight_70),
+        .weight_21(mlp_weight_71),
+        .weight_22(mlp_weight_72),
+        .weight_23(mlp_weight_73),
+        .weight_24(mlp_weight_74),
+        .weight_25(mlp_weight_75),
+        .weight_26(mlp_weight_76),
+        .weight_27(mlp_weight_77),
+        .weight_28(mlp_weight_78),
+        .weight_29(mlp_weight_79),
+        .weight_30(mlp_weight_80),
+        .weight_31(mlp_weight_81),
+        .weight_32(mlp_weight_82),
+        .weight_33(mlp_weight_83),
+        .weight_34(mlp_weight_84),
+        .weight_35(mlp_weight_85),
+        .weight_36(mlp_weight_86),
+        .weight_37(mlp_weight_87),
+        .weight_38(mlp_weight_88),
+        .weight_39(mlp_weight_89),
+        .weight_40(mlp_weight_90),
+        .weight_41(mlp_weight_91),
+        .weight_42(mlp_weight_92),
+        .weight_43(mlp_weight_93),
+        .weight_44(mlp_weight_94),
+        .weight_45(mlp_weight_95),
+        .weight_46(mlp_weight_96),
+        .weight_47(mlp_weight_97),
+        .weight_48(mlp_weight_98),
+        .weight_49(mlp_weight_99)
+        
+        .bias(mlp_weight_251), 
+
+        .out(HIDDEN_WIRE_1)
+    );
+
+    neuron_50in_relu U3 (
+        .clock(clock),
+        .reset(reset),
+        .input_0(INPUT_WIRE_0),
+        .input_1(INPUT_WIRE_1),
+        .input_2(INPUT_WIRE_2),
+        .input_3(INPUT_WIRE_3),
+        .input_4(INPUT_WIRE_4),
+        .input_5(INPUT_WIRE_5),
+        .input_6(INPUT_WIRE_6),
+        .input_7(INPUT_WIRE_7),
+        .input_8(INPUT_WIRE_8),
+        .input_9(INPUT_WIRE_9),
+        .input_10(INPUT_WIRE_10),
+        .input_11(INPUT_WIRE_11),
+        .input_12(INPUT_WIRE_12),
+        .input_13(INPUT_WIRE_13),
+        .input_14(INPUT_WIRE_14),
+        .input_15(INPUT_WIRE_15),
+        .input_16(INPUT_WIRE_16),
+        .input_17(INPUT_WIRE_17),
+        .input_18(INPUT_WIRE_18),
+        .input_19(INPUT_WIRE_19),
+        .input_20(INPUT_WIRE_20),
+        .input_21(INPUT_WIRE_21),
+        .input_22(INPUT_WIRE_22),
+        .input_23(INPUT_WIRE_23),
+        .input_24(INPUT_WIRE_24),
+        .input_25(INPUT_WIRE_25),
+        .input_26(INPUT_WIRE_26),
+        .input_27(INPUT_WIRE_27),
+        .input_28(INPUT_WIRE_28),
+        .input_29(INPUT_WIRE_29),
+        .input_30(INPUT_WIRE_30),
+        .input_31(INPUT_WIRE_31),
+        .input_32(INPUT_WIRE_32),
+        .input_33(INPUT_WIRE_33),
+        .input_34(INPUT_WIRE_34),
+        .input_35(INPUT_WIRE_35),
+        .input_36(INPUT_WIRE_36),
+        .input_37(INPUT_WIRE_37),
+        .input_38(INPUT_WIRE_38),
+        .input_39(INPUT_WIRE_39),
+        .input_40(INPUT_WIRE_40),
+        .input_41(INPUT_WIRE_41),
+        .input_42(INPUT_WIRE_42),
+        .input_43(INPUT_WIRE_43),
+        .input_44(INPUT_WIRE_44),
+        .input_45(INPUT_WIRE_45),
+        .input_46(INPUT_WIRE_46),
+        .input_47(INPUT_WIRE_47),
+        .input_48(INPUT_WIRE_48),
+        .input_49(INPUT_WIRE_49),
+
+        .weight_0(mlp_weight_100),
+        .weight_1(mlp_weight_101),
+        .weight_2(mlp_weight_102),
+        .weight_3(mlp_weight_103),
+        .weight_4(mlp_weight_104),
+        .weight_5(mlp_weight_105),
+        .weight_6(mlp_weight_106),
+        .weight_7(mlp_weight_107),
+        .weight_8(mlp_weight_108),
+        .weight_9(mlp_weight_109),
+        .weight_10(mlp_weight_110),
+        .weight_11(mlp_weight_111),
+        .weight_12(mlp_weight_112),
+        .weight_13(mlp_weight_113),
+        .weight_14(mlp_weight_114),
+        .weight_15(mlp_weight_115),
+        .weight_16(mlp_weight_116),
+        .weight_17(mlp_weight_117),
+        .weight_18(mlp_weight_118),
+        .weight_19(mlp_weight_119),
+        .weight_20(mlp_weight_120),
+        .weight_21(mlp_weight_121),
+        .weight_22(mlp_weight_122),
+        .weight_23(mlp_weight_123),
+        .weight_24(mlp_weight_124),
+        .weight_25(mlp_weight_125),
+        .weight_26(mlp_weight_126),
+        .weight_27(mlp_weight_127),
+        .weight_28(mlp_weight_128),
+        .weight_29(mlp_weight_129),
+        .weight_30(mlp_weight_130),
+        .weight_31(mlp_weight_131),
+        .weight_32(mlp_weight_132),
+        .weight_33(mlp_weight_133),
+        .weight_34(mlp_weight_134),
+        .weight_35(mlp_weight_135),
+        .weight_36(mlp_weight_136),
+        .weight_37(mlp_weight_137),
+        .weight_38(mlp_weight_138),
+        .weight_39(mlp_weight_139),
+        .weight_40(mlp_weight_140),
+        .weight_41(mlp_weight_141),
+        .weight_42(mlp_weight_142),
+        .weight_43(mlp_weight_143),
+        .weight_44(mlp_weight_144),
+        .weight_45(mlp_weight_145),
+        .weight_46(mlp_weight_146),
+        .weight_47(mlp_weight_147),
+        .weight_48(mlp_weight_148),
+        .weight_49(mlp_weight_149),
+        
+        .bias(HIDDEN_WIRE_2), 
+
+        .out(out)
+    );
+
+    neuron_50in_relu U4 (
+        .clock(clock),
+        .reset(reset),
+        .input_0(INPUT_WIRE_0),
+        .input_1(INPUT_WIRE_1),
+        .input_2(INPUT_WIRE_2),
+        .input_3(INPUT_WIRE_3),
+        .input_4(INPUT_WIRE_4),
+        .input_5(INPUT_WIRE_5),
+        .input_6(INPUT_WIRE_6),
+        .input_7(INPUT_WIRE_7),
+        .input_8(INPUT_WIRE_8),
+        .input_9(INPUT_WIRE_9),
+        .input_10(INPUT_WIRE_10),
+        .input_11(INPUT_WIRE_11),
+        .input_12(INPUT_WIRE_12),
+        .input_13(INPUT_WIRE_13),
+        .input_14(INPUT_WIRE_14),
+        .input_15(INPUT_WIRE_15),
+        .input_16(INPUT_WIRE_16),
+        .input_17(INPUT_WIRE_17),
+        .input_18(INPUT_WIRE_18),
+        .input_19(INPUT_WIRE_19),
+        .input_20(INPUT_WIRE_20),
+        .input_21(INPUT_WIRE_21),
+        .input_22(INPUT_WIRE_22),
+        .input_23(INPUT_WIRE_23),
+        .input_24(INPUT_WIRE_24),
+        .input_25(INPUT_WIRE_25),
+        .input_26(INPUT_WIRE_26),
+        .input_27(INPUT_WIRE_27),
+        .input_28(INPUT_WIRE_28),
+        .input_29(INPUT_WIRE_29),
+        .input_30(INPUT_WIRE_30),
+        .input_31(INPUT_WIRE_31),
+        .input_32(INPUT_WIRE_32),
+        .input_33(INPUT_WIRE_33),
+        .input_34(INPUT_WIRE_34),
+        .input_35(INPUT_WIRE_35),
+        .input_36(INPUT_WIRE_36),
+        .input_37(INPUT_WIRE_37),
+        .input_38(INPUT_WIRE_38),
+        .input_39(INPUT_WIRE_39),
+        .input_40(INPUT_WIRE_40),
+        .input_41(INPUT_WIRE_41),
+        .input_42(INPUT_WIRE_42),
+        .input_43(INPUT_WIRE_43),
+        .input_44(INPUT_WIRE_44),
+        .input_45(INPUT_WIRE_45),
+        .input_46(INPUT_WIRE_46),
+        .input_47(INPUT_WIRE_47),
+        .input_48(INPUT_WIRE_48),
+        .input_49(INPUT_WIRE_49),
+
+        .weight_0(mlp_weight_150),
+        .weight_1(mlp_weight_151),
+        .weight_2(mlp_weight_152),
+        .weight_3(mlp_weight_153),
+        .weight_4(mlp_weight_154),
+        .weight_5(mlp_weight_155),
+        .weight_6(mlp_weight_156),
+        .weight_7(mlp_weight_157),
+        .weight_8(mlp_weight_158),
+        .weight_9(mlp_weight_159),
+        .weight_10(mlp_weight_160),
+        .weight_11(mlp_weight_161),
+        .weight_12(mlp_weight_162),
+        .weight_13(mlp_weight_163),
+        .weight_14(mlp_weight_164),
+        .weight_15(mlp_weight_165),
+        .weight_16(mlp_weight_166),
+        .weight_17(mlp_weight_167),
+        .weight_18(mlp_weight_168),
+        .weight_19(mlp_weight_169),
+        .weight_20(mlp_weight_170),
+        .weight_21(mlp_weight_171),
+        .weight_22(mlp_weight_172),
+        .weight_23(mlp_weight_173),
+        .weight_24(mlp_weight_174),
+        .weight_25(mlp_weight_175),
+        .weight_26(mlp_weight_176),
+        .weight_27(mlp_weight_177),
+        .weight_28(mlp_weight_178),
+        .weight_29(mlp_weight_179),
+        .weight_30(mlp_weight_180),
+        .weight_31(mlp_weight_181),
+        .weight_32(mlp_weight_182),
+        .weight_33(mlp_weight_183),
+        .weight_34(mlp_weight_184),
+        .weight_35(mlp_weight_185),
+        .weight_36(mlp_weight_186),
+        .weight_37(mlp_weight_187),
+        .weight_38(mlp_weight_188),
+        .weight_39(mlp_weight_189),
+        .weight_40(mlp_weight_190),
+        .weight_41(mlp_weight_191),
+        .weight_42(mlp_weight_192),
+        .weight_43(mlp_weight_193),
+        .weight_44(mlp_weight_194),
+        .weight_45(mlp_weight_195),
+        .weight_46(mlp_weight_196),
+        .weight_47(mlp_weight_197),
+        .weight_48(mlp_weight_198),
+        .weight_49(mlp_weight_199),
+        
+        .bias(mlp_weight_253), 
+
+        .out(HIDDEN_WIRE_3)
+    );
+
+    neuron_50in_relu U5 (
+        .clock(clock),
+        .reset(reset),
+        .input_0(INPUT_WIRE_0),
+        .input_1(INPUT_WIRE_1),
+        .input_2(INPUT_WIRE_2),
+        .input_3(INPUT_WIRE_3),
+        .input_4(INPUT_WIRE_4),
+        .input_5(INPUT_WIRE_5),
+        .input_6(INPUT_WIRE_6),
+        .input_7(INPUT_WIRE_7),
+        .input_8(INPUT_WIRE_8),
+        .input_9(INPUT_WIRE_9),
+        .input_10(INPUT_WIRE_10),
+        .input_11(INPUT_WIRE_11),
+        .input_12(INPUT_WIRE_12),
+        .input_13(INPUT_WIRE_13),
+        .input_14(INPUT_WIRE_14),
+        .input_15(INPUT_WIRE_15),
+        .input_16(INPUT_WIRE_16),
+        .input_17(INPUT_WIRE_17),
+        .input_18(INPUT_WIRE_18),
+        .input_19(INPUT_WIRE_19),
+        .input_20(INPUT_WIRE_20),
+        .input_21(INPUT_WIRE_21),
+        .input_22(INPUT_WIRE_22),
+        .input_23(INPUT_WIRE_23),
+        .input_24(INPUT_WIRE_24),
+        .input_25(INPUT_WIRE_25),
+        .input_26(INPUT_WIRE_26),
+        .input_27(INPUT_WIRE_27),
+        .input_28(INPUT_WIRE_28),
+        .input_29(INPUT_WIRE_29),
+        .input_30(INPUT_WIRE_30),
+        .input_31(INPUT_WIRE_31),
+        .input_32(INPUT_WIRE_32),
+        .input_33(INPUT_WIRE_33),
+        .input_34(INPUT_WIRE_34),
+        .input_35(INPUT_WIRE_35),
+        .input_36(INPUT_WIRE_36),
+        .input_37(INPUT_WIRE_37),
+        .input_38(INPUT_WIRE_38),
+        .input_39(INPUT_WIRE_39),
+        .input_40(INPUT_WIRE_40),
+        .input_41(INPUT_WIRE_41),
+        .input_42(INPUT_WIRE_42),
+        .input_43(INPUT_WIRE_43),
+        .input_44(INPUT_WIRE_44),
+        .input_45(INPUT_WIRE_45),
+        .input_46(INPUT_WIRE_46),
+        .input_47(INPUT_WIRE_47),
+        .input_48(INPUT_WIRE_48),
+        .input_49(INPUT_WIRE_49),
+
+        .weight_0(mlp_weight_200),
+        .weight_1(mlp_weight_201),
+        .weight_2(mlp_weight_202),
+        .weight_3(mlp_weight_203),
+        .weight_4(mlp_weight_204),
+        .weight_5(mlp_weight_205),
+        .weight_6(mlp_weight_206),
+        .weight_7(mlp_weight_207),
+        .weight_8(mlp_weight_208),
+        .weight_9(mlp_weight_209),
+        .weight_10(mlp_weight_210),
+        .weight_11(mlp_weight_211),
+        .weight_12(mlp_weight_212),
+        .weight_13(mlp_weight_213),
+        .weight_14(mlp_weight_214),
+        .weight_15(mlp_weight_215),
+        .weight_16(mlp_weight_216),
+        .weight_17(mlp_weight_217),
+        .weight_18(mlp_weight_218),
+        .weight_19(mlp_weight_219),
+        .weight_20(mlp_weight_220),
+        .weight_21(mlp_weight_221),
+        .weight_22(mlp_weight_222),
+        .weight_23(mlp_weight_223),
+        .weight_24(mlp_weight_224),
+        .weight_25(mlp_weight_225),
+        .weight_26(mlp_weight_226),
+        .weight_27(mlp_weight_227),
+        .weight_28(mlp_weight_228),
+        .weight_29(mlp_weight_229),
+        .weight_30(mlp_weight_230),
+        .weight_31(mlp_weight_231),
+        .weight_32(mlp_weight_232),
+        .weight_33(mlp_weight_233),
+        .weight_34(mlp_weight_234),
+        .weight_35(mlp_weight_235),
+        .weight_36(mlp_weight_236),
+        .weight_37(mlp_weight_237),
+        .weight_38(mlp_weight_238),
+        .weight_39(mlp_weight_239),
+        .weight_40(mlp_weight_240),
+        .weight_41(mlp_weight_241),
+        .weight_42(mlp_weight_242),
+        .weight_43(mlp_weight_243),
+        .weight_44(mlp_weight_244),
+        .weight_45(mlp_weight_245),
+        .weight_46(mlp_weight_246),
+        .weight_47(mlp_weight_247),
+        .weight_48(mlp_weight_248),
+        .weight_49(mlp_weight_249),
+        
+        .bias(mlp_weight_254), 
+
+        .out(HIDDEN_WIRE_4)
+    );
+
+    neuron_5in_sigmoid U6 (
+        .clock(clock),
+        .reset(reset),
+        
+        .input_0(HIDDEN_WIRE_0),
+        .input_1(HIDDEN_WIRE_1),
+        .input_2(HIDDEN_WIRE_2),
+        .input_3(HIDDEN_WIRE_3),
+        .input_4(HIDDEN_WIRE_4),
+
+        .weight_0(mlp_weight_250),
+        .weight_1(mlp_weight_251),
+        .weight_2(mlp_weight_252),
+        .weight_3(mlp_weight_253),
+        .weight_4(mlp_weight_254),
+
+        .bias(mlp_weight_260),
 
         .out(out)
     );
