@@ -76,7 +76,7 @@ module mlp_tb;
     );
 
     integer i;
-    reg signed [15:0] weights [0:50];
+    reg signed [15:0] parameters [0:260];
 
     initial begin
         // Initialize Inputs
@@ -86,8 +86,8 @@ module mlp_tb;
         reset = 0;
         #10;
 
-        $readmemb("input_values.mem", inputs);
-        $readmemb("weights_values.mem", weights);
+        $readmemb("rings_data.mem", inputs);
+        $readmemb("q15_params.mem", parameters);
 
         // Generate a positive impulse on reset
         reset = 1;
@@ -96,20 +96,20 @@ module mlp_tb;
         #10; 
 
         // Display the inputs
-        for (i = 0; i < 51; i = i + 1) begin
-            $display("%d -> Weights %h %d %f \tInputs: %h %d %f", i, weights[i], weights[i], weights[i]/32768.0, inputs[i], inputs[i], inputs[i]/32768.0);
+        for (i = 0; i <= 260; i = i + 1) begin
+            $display("%d -> Weights %h %d %f \tInputs: %h %d %f", i, parameters[i], parameters[i], parameters[i]/32768.0, inputs[i], inputs[i], inputs[i]/32768.0);
         end
 
         // Initialize weights
         
-        for (i = 0; i <= 51; i = i + 1) begin
-            weight_enable = 0;
-            address = i;
-            weight = weights[i];
-            #5;
-            weight_enable = 1;
-            #10;
-        end
+        // for (i = 0; i <= 51; i = i + 1) begin
+        //     weight_enable = 0;
+        //     address = i;
+        //     weight = weights[i];
+        //     #5;
+        //     weight_enable = 1;
+        //     #10;
+        // end
 
         // Wait for the perceptron to process the inputs
         #500;
