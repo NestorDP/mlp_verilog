@@ -10,7 +10,7 @@ module mlp_tb;
     reg signed [15:0] weight;
 
     // Output
-    wire signed [22:0] out;
+    wire signed [15:0] out;
 
     // Instantiate the Perceptron module
     mlp uut (
@@ -83,16 +83,16 @@ module mlp_tb;
 
         weight_enable = 1;
         clock = 0;
-        reset = 0;
+        reset = 1;
         #10;
 
-        $readmemb("rings_data.mem", inputs);
-        $readmemb("q15_params.mem", parameters);
+        $readmemb("mem/rings_data.mem", inputs);
+        $readmemb("mem/q15_params.mem", parameters);
 
         // Generate a positive impulse on reset
-        reset = 1;
-        #5; 
         reset = 0;
+        #5; 
+        reset = 1;
         #10; 
 
         // Display the inputs
@@ -100,24 +100,23 @@ module mlp_tb;
             $display("%d -> Weights %h %d %f \tInputs: %h %d %f", i, parameters[i], parameters[i], parameters[i]/32768.0, inputs[i], inputs[i], inputs[i]/32768.0);
         end
 
-        // Initialize weights
+        // Initialize weights        
+        for (i = 0; i <= 51; i = i + 1) begin
+            weight_enable = 0;
+            address = i;
+            weight = parameters[i];
+            #5;
+            weight_enable = 1;
+            #10;
+        end
         
-        // for (i = 0; i <= 51; i = i + 1) begin
-        //     weight_enable = 0;
-        //     address = i;
-        //     weight = weights[i];
-        //     #5;
-        //     weight_enable = 1;
-        //     #10;
-        // end
-
-        // Wait for the perceptron to process the inputs
-        #500;
-
         // Generate a positive impulse on clock
         clock = 1; 
         #10; 
         clock = 0;
+
+        // Wait for the perceptron to process the inputs
+        #50;
 
         // Display the output
         $display("Output: %h %d %f", out, out, out/32768.0);
