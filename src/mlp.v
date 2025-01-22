@@ -3,7 +3,7 @@ module mlp (
     input wire reset,
     input wire weight_enable,
 
-    input        [7:0]  address,
+    input        [9:0]  address,
     input signed [15:0] weight,
         
     // 50 inputs in Q15 format
@@ -57,8 +57,15 @@ module mlp (
     input signed [15:0] input_47,
     input signed [15:0] input_48,
     input signed [15:0] input_49,
+    
+    output signed [22:0] out_1,
+    output signed [22:0] out_2,
+    output signed [22:0] out_3,
+    output signed [22:0] out_4,
+    output signed [22:0] out_5,
 
     output signed [15:0] out
+
 );
 
     wire signed [15:0] INPUT_WIRE_0;
@@ -708,6 +715,9 @@ module mlp (
     neuron_50in_relu U1 (
         .clock(clock),
         .reset(reset),
+
+        .bias(mlp_weight_250), 
+
         .input_0(INPUT_WIRE_0),
         .input_1(INPUT_WIRE_1),
         .input_2(INPUT_WIRE_2),
@@ -809,14 +819,16 @@ module mlp (
         .weight_47(mlp_weight_47),
         .weight_48(mlp_weight_48),
         .weight_49(mlp_weight_49),
-        .bias(mlp_weight_250), 
-
+        
         .out(HIDDEN_WIRE_0)
     );
 
     neuron_50in_relu U2 (
         .clock(clock),
         .reset(reset),
+
+        .bias(mlp_weight_251), 
+
         .input_0(INPUT_WIRE_0),
         .input_1(INPUT_WIRE_1),
         .input_2(INPUT_WIRE_2),
@@ -918,8 +930,6 @@ module mlp (
         .weight_47(mlp_weight_97),
         .weight_48(mlp_weight_98),
         .weight_49(mlp_weight_99),
-        
-        .bias(mlp_weight_251), 
 
         .out(HIDDEN_WIRE_1)
     );
@@ -927,6 +937,9 @@ module mlp (
     neuron_50in_relu U3 (
         .clock(clock),
         .reset(reset),
+
+        .bias(mlp_weight_252), 
+
         .input_0(INPUT_WIRE_0),
         .input_1(INPUT_WIRE_1),
         .input_2(INPUT_WIRE_2),
@@ -1028,8 +1041,6 @@ module mlp (
         .weight_47(mlp_weight_147),
         .weight_48(mlp_weight_148),
         .weight_49(mlp_weight_149),
-        
-        .bias(mlp_weight_251), 
 
         .out(HIDDEN_WIRE_2)
     );
@@ -1037,6 +1048,9 @@ module mlp (
     neuron_50in_relu U4 (
         .clock(clock),
         .reset(reset),
+
+        .bias(mlp_weight_253),
+
         .input_0(INPUT_WIRE_0),
         .input_1(INPUT_WIRE_1),
         .input_2(INPUT_WIRE_2),
@@ -1137,9 +1151,7 @@ module mlp (
         .weight_46(mlp_weight_196),
         .weight_47(mlp_weight_197),
         .weight_48(mlp_weight_198),
-        .weight_49(mlp_weight_199),
-        
-        .bias(mlp_weight_253), 
+        .weight_49(mlp_weight_199), 
 
         .out(HIDDEN_WIRE_3)
     );
@@ -1147,6 +1159,9 @@ module mlp (
     neuron_50in_relu U5 (
         .clock(clock),
         .reset(reset),
+
+        .bias(mlp_weight_254), 
+
         .input_0(INPUT_WIRE_0),
         .input_1(INPUT_WIRE_1),
         .input_2(INPUT_WIRE_2),
@@ -1248,8 +1263,6 @@ module mlp (
         .weight_47(mlp_weight_247),
         .weight_48(mlp_weight_248),
         .weight_49(mlp_weight_249),
-        
-        .bias(mlp_weight_254), 
 
         .out(HIDDEN_WIRE_4)
     );
@@ -1271,8 +1284,15 @@ module mlp (
         .weight_2(mlp_weight_257),
         .weight_3(mlp_weight_258),
         .weight_4(mlp_weight_259),
+        
 
         .out(out)
     );
+
+    assign out_1 = HIDDEN_WIRE_0;
+    assign out_2 = HIDDEN_WIRE_1;
+    assign out_3 = HIDDEN_WIRE_2;
+    assign out_4 = HIDDEN_WIRE_3;
+    assign out_5 = HIDDEN_WIRE_4;
 
 endmodule

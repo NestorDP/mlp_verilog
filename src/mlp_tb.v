@@ -5,12 +5,18 @@ module mlp_tb;
     reg reset;
     reg weight_enable;
 
-    reg signed [7:0] address;
+    reg signed [9:0] address;
     reg signed [15:0] inputs [0:49];
     reg signed [15:0] weight;
 
     // Output
     wire signed [15:0] out;
+
+    wire signed [22:0] out_1;
+    wire signed [22:0] out_2;
+    wire signed [22:0] out_3;
+    wire signed [22:0] out_4;
+    wire signed [22:0] out_5;
 
     // Instantiate the Perceptron module
     mlp uut (
@@ -72,6 +78,12 @@ module mlp_tb;
         .input_48(inputs[48]),
         .input_49(inputs[49]),
 
+        .out_1(out_1),
+        .out_2(out_2),
+        .out_3(out_3),
+        .out_4(out_4),
+        .out_5(out_5),
+
         .out(out)
     );
 
@@ -86,7 +98,7 @@ module mlp_tb;
         reset = 1;
         #10;
 
-        $readmemb("mem/rings_data.mem", inputs);
+        $readmemb("mem/rings_data_2.mem", inputs);
         $readmemb("mem/q15_params.mem", parameters);
 
         // Generate a positive impulse on reset
@@ -97,11 +109,11 @@ module mlp_tb;
 
         // Display the inputs
         for (i = 0; i <= 260; i = i + 1) begin
-            $display("%d -> Weights %h %d %f \tInputs: %h %d %f", i, parameters[i], parameters[i], parameters[i]/32768.0, inputs[i], inputs[i], inputs[i]/32768.0);
+            $display("Weights %d: %b %d %f \tInputs %d: %b %d %f", i, parameters[i], parameters[i], parameters[i]/32768.0, i, inputs[i], inputs[i], inputs[i]/32768.0);
         end
 
-        // Initialize weights        
-        for (i = 0; i <= 51; i = i + 1) begin
+        // Initialize 
+        for (i = 0; i <= 260; i = i + 1) begin
             weight_enable = 0;
             address = i;
             weight = parameters[i];
@@ -116,6 +128,14 @@ module mlp_tb;
         clock = 0;
 
         // Wait for the perceptron to process the inputs
+        #50;
+
+        // // Generate a positive impulse on clock
+        clock = 1; 
+        #10; 
+        clock = 0;
+
+        // // Wait for the perceptron to process the inputs
         #50;
 
         // Display the output

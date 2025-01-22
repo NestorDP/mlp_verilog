@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="mlp_tb_snapshot.wdb" id="1">
+         <top_modules>
+            <top_module name="mlp_tb" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0.000 ns"></ZoomStartTime>
+      <ZoomEndTime time="4,199.144 ns"></ZoomEndTime>
+      <Cursor1Time time="4,060.000 ns"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="203"></NameColumnWidth>
+      <ValueColumnWidth column_width="228"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="14" />
+   <wvobject type="logic" fp_name="/mlp_tb/clock">
+      <obj_property name="ElementShortName">clock</obj_property>
+      <obj_property name="ObjectShortName">clock</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mlp_tb/reset">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mlp_tb/weight_enable">
+      <obj_property name="ElementShortName">weight_enable</obj_property>
+      <obj_property name="ObjectShortName">weight_enable</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mlp_tb/address">
+      <obj_property name="ElementShortName">address[9:0]</obj_property>
+      <obj_property name="ObjectShortName">address[9:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mlp_tb/inputs">
+      <obj_property name="ElementShortName">inputs[0:49][15:0]</obj_property>
+      <obj_property name="ObjectShortName">inputs[0:49][15:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mlp_tb/weight">
+      <obj_property name="ElementShortName">weight[15:0]</obj_property>
+      <obj_property name="ObjectShortName">weight[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mlp_tb/out">
+      <obj_property name="ElementShortName">out[15:0]</obj_property>
+      <obj_property name="ObjectShortName">out[15:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mlp_tb/out_1">
+      <obj_property name="ElementShortName">out_1[22:0]</obj_property>
+      <obj_property name="ObjectShortName">out_1[22:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mlp_tb/out_2">
+      <obj_property name="ElementShortName">out_2[22:0]</obj_property>
+      <obj_property name="ObjectShortName">out_2[22:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mlp_tb/out_3">
+      <obj_property name="ElementShortName">out_3[22:0]</obj_property>
+      <obj_property name="ObjectShortName">out_3[22:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mlp_tb/out_4">
+      <obj_property name="ElementShortName">out_4[22:0]</obj_property>
+      <obj_property name="ObjectShortName">out_4[22:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mlp_tb/out_5">
+      <obj_property name="ElementShortName">out_5[22:0]</obj_property>
+      <obj_property name="ObjectShortName">out_5[22:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mlp_tb/i">
+      <obj_property name="ElementShortName">i[31:0]</obj_property>
+      <obj_property name="ObjectShortName">i[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mlp_tb/parameters">
+      <obj_property name="ElementShortName">parameters[0:260][15:0]</obj_property>
+      <obj_property name="ObjectShortName">parameters[0:260][15:0]</obj_property>
+   </wvobject>
+</wave_config>

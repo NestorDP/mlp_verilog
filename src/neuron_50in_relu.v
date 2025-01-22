@@ -224,10 +224,10 @@ module neuron_50in_relu (
     assign bias_q15_to_q30 = bias <<< 15;
 
     // Sum all the multiplications and add the bias converted to Q30
-    assign sum = multi0 + 
-                 multi1 + 
+    assign sum = multi0 +
+                 multi1 +
                  multi2 + 
-                 multi3 + 
+                 multi3 +
                  multi4 + 
                  multi5 + 
                  multi6 + 
@@ -273,7 +273,7 @@ module neuron_50in_relu (
                  multi46 + 
                  multi47 + 
                  multi48 + 
-                 multi49 + 
+                 multi49 +
                  bias_q15_to_q30;
 
     // Convert the sum to Q15 format
@@ -296,5 +296,4 @@ module neuron_50in_relu (
 
     assign out = output_register;
 endmodule
-
 

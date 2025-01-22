@@ -9,7 +9,7 @@ module sigmoid (
 
     // Define lookup tables
     reg signed [15:0] angular [0:10]; //Q1.15 format
-    reg signed [31:0] linear [0:10]; //Q2.30 format
+    reg signed [31:0] linear [0:10];  //Q2.30 format
 
     // Initialize lookup tables on reset
     localparam ANGULAR_0 = 16'd254;
