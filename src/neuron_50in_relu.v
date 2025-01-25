@@ -2,7 +2,7 @@ module neuron_50in_relu (
     input clock,
     input reset,
 
-    input signed [15:0] bias,
+    input signed [18:0] bias,
 
     // 50 inputs in Q15 format
     input signed [15:0] input_0,

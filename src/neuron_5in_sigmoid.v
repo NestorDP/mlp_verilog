@@ -3,7 +3,7 @@ module neuron_5in_sigmoid (
     input reset,
 
     // Bias input in Q15 format
-    input signed [15:0] bias,
+    input signed [18:0] bias,
 
     // 5 inputs in Q7.15 format
     input signed [22:0] input_0,
@@ -13,11 +13,11 @@ module neuron_5in_sigmoid (
     input signed [22:0] input_4,
 
     // 50 coefficients in Q15 format
-    input signed [15:0] weight_0,
-    input signed [15:0] weight_1,
-    input signed [15:0] weight_2,
-    input signed [15:0] weight_3,
-    input signed [15:0] weight_4,
+    input signed [18:0] weight_0,
+    input signed [18:0] weight_1,
+    input signed [18:0] weight_2,
+    input signed [18:0] weight_3,
+    input signed [18:0] weight_4,
 
     // Output in Q15 format
     output signed [15:0] out

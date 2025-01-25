@@ -7,7 +7,7 @@ module mlp_tb;
 
     reg signed [9:0] address;
     reg signed [15:0] inputs [0:49];
-    reg signed [15:0] weight;
+    reg signed [18:0] weight;
 
     // Output
     wire signed [15:0] out;
@@ -88,7 +88,7 @@ module mlp_tb;
     );
 
     integer i;
-    reg signed [15:0] parameters [0:260];
+    reg signed [18:0] parameters [0:260];
 
     initial begin
         // Initialize Inputs
@@ -99,7 +99,7 @@ module mlp_tb;
         #10;
 
         $readmemb("mem/rings_data_2.mem", inputs);
-        $readmemb("mem/q15_params.mem", parameters);
+        $readmemb("mem/param.mem", parameters);
 
         // Generate a positive impulse on reset
         reset = 0;
