@@ -98,7 +98,7 @@ module mlp_tb;
         reset = 1;
         #10;
 
-        $readmemb("mem/rings_data_2.mem", inputs);
+        $readmemb("mem/rings_data_1.mem", inputs);
         $readmemb("mem/param.mem", parameters);
 
         // Generate a positive impulse on reset
@@ -126,17 +126,13 @@ module mlp_tb;
         clock = 1; 
         #10; 
         clock = 0;
-
-        // Wait for the perceptron to process the inputs
         #50;
 
-        // // Generate a positive impulse on clock
-        clock = 1; 
-        #10; 
-        clock = 0;
-
-        // // Wait for the perceptron to process the inputs
-        #50;
+        // Generate a positive impulse on clock
+        // clock = 1; 
+        // #10; 
+        // clock = 0;
+        // #50;
 
         // Display the output
         $display("Output: %h %d %f", out, out, out/32768.0);
