@@ -98,7 +98,7 @@ module mlp_tb;
         reset = 1;
         #10;
 
-        $readmemb("mem/rings_data_1.mem", inputs);
+        $readmemb("mem/rings_data_2.mem", inputs);
         $readmemb("mem/param.mem", parameters);
 
         // Generate a positive impulse on reset
