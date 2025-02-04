@@ -2,7 +2,7 @@ module neuron_50in_relu (
     input clock,
     input reset,
 
-    input signed [15:0] bias,
+    input signed [22:0] bias,
 
     // 50 inputs in Q15 format
     input signed [15:0] input_0,
@@ -57,111 +57,111 @@ module neuron_50in_relu (
     input signed [15:0] input_49,
 
     // 50 coefficients in Q3.15 format
-    input signed [18:0] weight_0,
-    input signed [18:0] weight_1,
-    input signed [18:0] weight_2,
-    input signed [18:0] weight_3,
-    input signed [18:0] weight_4,
-    input signed [18:0] weight_5,
-    input signed [18:0] weight_6,
-    input signed [18:0] weight_7,
-    input signed [18:0] weight_8,
-    input signed [18:0] weight_9,
-    input signed [18:0] weight_10,
-    input signed [18:0] weight_11,
-    input signed [18:0] weight_12,
-    input signed [18:0] weight_13,
-    input signed [18:0] weight_14,
-    input signed [18:0] weight_15,
-    input signed [18:0] weight_16,
-    input signed [18:0] weight_17,
-    input signed [18:0] weight_18,
-    input signed [18:0] weight_19,
-    input signed [18:0] weight_20,
-    input signed [18:0] weight_21,
-    input signed [18:0] weight_22,
-    input signed [18:0] weight_23,
-    input signed [18:0] weight_24,
-    input signed [18:0] weight_25,
-    input signed [18:0] weight_26,
-    input signed [18:0] weight_27,
-    input signed [18:0] weight_28,
-    input signed [18:0] weight_29,
-    input signed [18:0] weight_30,
-    input signed [18:0] weight_31,
-    input signed [18:0] weight_32,
-    input signed [18:0] weight_33,
-    input signed [18:0] weight_34,
-    input signed [18:0] weight_35,
-    input signed [18:0] weight_36,
-    input signed [18:0] weight_37,
-    input signed [18:0] weight_38,
-    input signed [18:0] weight_39,
-    input signed [18:0] weight_40,
-    input signed [18:0] weight_41,
-    input signed [18:0] weight_42,
-    input signed [18:0] weight_43,
-    input signed [18:0] weight_44,
-    input signed [18:0] weight_45,
-    input signed [18:0] weight_46,
-    input signed [18:0] weight_47,
-    input signed [18:0] weight_48,
-    input signed [18:0] weight_49,
+    input signed [22:0] weight_0,
+    input signed [22:0] weight_1,
+    input signed [22:0] weight_2,
+    input signed [22:0] weight_3,
+    input signed [22:0] weight_4,
+    input signed [22:0] weight_5,
+    input signed [22:0] weight_6,
+    input signed [22:0] weight_7,
+    input signed [22:0] weight_8,
+    input signed [22:0] weight_9,
+    input signed [22:0] weight_10,
+    input signed [22:0] weight_11,
+    input signed [22:0] weight_12,
+    input signed [22:0] weight_13,
+    input signed [22:0] weight_14,
+    input signed [22:0] weight_15,
+    input signed [22:0] weight_16,
+    input signed [22:0] weight_17,
+    input signed [22:0] weight_18,
+    input signed [22:0] weight_19,
+    input signed [22:0] weight_20,
+    input signed [22:0] weight_21,
+    input signed [22:0] weight_22,
+    input signed [22:0] weight_23,
+    input signed [22:0] weight_24,
+    input signed [22:0] weight_25,
+    input signed [22:0] weight_26,
+    input signed [22:0] weight_27,
+    input signed [22:0] weight_28,
+    input signed [22:0] weight_29,
+    input signed [22:0] weight_30,
+    input signed [22:0] weight_31,
+    input signed [22:0] weight_32,
+    input signed [22:0] weight_33,
+    input signed [22:0] weight_34,
+    input signed [22:0] weight_35,
+    input signed [22:0] weight_36,
+    input signed [22:0] weight_37,
+    input signed [22:0] weight_38,
+    input signed [22:0] weight_39,
+    input signed [22:0] weight_40,
+    input signed [22:0] weight_41,
+    input signed [22:0] weight_42,
+    input signed [22:0] weight_43,
+    input signed [22:0] weight_44,
+    input signed [22:0] weight_45,
+    input signed [22:0] weight_46,
+    input signed [22:0] weight_47,
+    input signed [22:0] weight_48,
+    input signed [22:0] weight_49,
 
     // Output in Q15 format
     output signed [22:0] out
 );
     // 50 multipliers in Q30 format
-    wire signed [36:0] multi0; 
-    wire signed [36:0] multi1;
-    wire signed [36:0] multi2;
-    wire signed [36:0] multi3;
-    wire signed [36:0] multi4;
-    wire signed [36:0] multi5;
-    wire signed [36:0] multi6;
-    wire signed [36:0] multi7;
-    wire signed [36:0] multi8;
-    wire signed [36:0] multi9;
-    wire signed [36:0] multi10;
-    wire signed [36:0] multi11;
-    wire signed [36:0] multi12;
-    wire signed [36:0] multi13;
-    wire signed [36:0] multi14;
-    wire signed [36:0] multi15;
-    wire signed [36:0] multi16;
-    wire signed [36:0] multi17;
-    wire signed [36:0] multi18;
-    wire signed [36:0] multi19;
-    wire signed [36:0] multi20;
-    wire signed [36:0] multi21;
-    wire signed [36:0] multi22;
-    wire signed [36:0] multi23;
-    wire signed [36:0] multi24;
-    wire signed [36:0] multi25;
-    wire signed [36:0] multi26;
-    wire signed [36:0] multi27;
-    wire signed [36:0] multi28;
-    wire signed [36:0] multi29;
-    wire signed [36:0] multi30;
-    wire signed [36:0] multi31;
-    wire signed [36:0] multi32;
-    wire signed [36:0] multi33;
-    wire signed [36:0] multi34;
-    wire signed [36:0] multi35;
-    wire signed [36:0] multi36;
-    wire signed [36:0] multi37;
-    wire signed [36:0] multi38;
-    wire signed [36:0] multi39;
-    wire signed [36:0] multi40;
-    wire signed [36:0] multi41;
-    wire signed [36:0] multi42;
-    wire signed [36:0] multi43;
-    wire signed [36:0] multi44;
-    wire signed [36:0] multi45;
-    wire signed [36:0] multi46;
-    wire signed [36:0] multi47;
-    wire signed [36:0] multi48;
-    wire signed [36:0] multi49;
+    wire signed [38:0] multi0; 
+    wire signed [38:0] multi1;
+    wire signed [38:0] multi2;
+    wire signed [38:0] multi3;
+    wire signed [38:0] multi4;
+    wire signed [38:0] multi5;
+    wire signed [38:0] multi6;
+    wire signed [38:0] multi7;
+    wire signed [38:0] multi8;
+    wire signed [38:0] multi9;
+    wire signed [38:0] multi10;
+    wire signed [38:0] multi11;
+    wire signed [38:0] multi12;
+    wire signed [38:0] multi13;
+    wire signed [38:0] multi14;
+    wire signed [38:0] multi15;
+    wire signed [38:0] multi16;
+    wire signed [38:0] multi17;
+    wire signed [38:0] multi18;
+    wire signed [38:0] multi19;
+    wire signed [38:0] multi20;
+    wire signed [38:0] multi21;
+    wire signed [38:0] multi22;
+    wire signed [38:0] multi23;
+    wire signed [38:0] multi24;
+    wire signed [38:0] multi25;
+    wire signed [38:0] multi26;
+    wire signed [38:0] multi27;
+    wire signed [38:0] multi28;
+    wire signed [38:0] multi29;
+    wire signed [38:0] multi30;
+    wire signed [38:0] multi31;
+    wire signed [38:0] multi32;
+    wire signed [38:0] multi33;
+    wire signed [38:0] multi34;
+    wire signed [38:0] multi35;
+    wire signed [38:0] multi36;
+    wire signed [38:0] multi37;
+    wire signed [38:0] multi38;
+    wire signed [38:0] multi39;
+    wire signed [38:0] multi40;
+    wire signed [38:0] multi41;
+    wire signed [38:0] multi42;
+    wire signed [38:0] multi43;
+    wire signed [38:0] multi44;
+    wire signed [38:0] multi45;
+    wire signed [38:0] multi46;
+    wire signed [38:0] multi47;
+    wire signed [38:0] multi48;
+    wire signed [38:0] multi49;
 
     // Perform the multiplication of the inputs and coefficients
     assign multi0 = input_0 * weight_0;
@@ -217,7 +217,7 @@ module neuron_50in_relu (
 
     reg  signed [22:0] output_register;     //Q7.15 format
     wire signed [22:0] output_typeconvert;  //Q7.15 format
-    wire signed [37:0] sum;                 //Q7.30 format
+    wire signed [39:0] sum;                 //Q9.30 format
     wire signed [31:0] bias_q15_to_q30;     //Q7.30 format
 
     // Shift the bias value left by 15 bits to convert it to Q30

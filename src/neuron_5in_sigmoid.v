@@ -3,7 +3,7 @@ module neuron_5in_sigmoid (
     input reset,
 
     // Bias input in Q15 format
-    input signed [18:0] bias,
+    input signed [22:0] bias,
 
     // 5 inputs in Q7.15 format
     input signed [22:0] input_0,
@@ -12,22 +12,29 @@ module neuron_5in_sigmoid (
     input signed [22:0] input_3,
     input signed [22:0] input_4,
 
-    // 50 coefficients in Q15 format
-    input signed [18:0] weight_0,
-    input signed [18:0] weight_1,
-    input signed [18:0] weight_2,
-    input signed [18:0] weight_3,
-    input signed [18:0] weight_4,
+    // 5 weights in Q7.15 format
+    input signed [22:0] weight_0,
+    input signed [22:0] weight_1,
+    input signed [22:0] weight_2,
+    input signed [22:0] weight_3,
+    input signed [22:0] weight_4,
+
+    // Output in Q42 format
+    output signed [45:0] out_1,
+    output signed [45:0] out_2,
+    output signed [45:0] out_3,
+    output signed [45:0] out_4,
+    output signed [45:0] out_5,
 
     // Output in Q15 format
     output signed [15:0] out
 );
     // 50 multipliers in Q30 format
-    wire signed [31:0] multi0; 
-    wire signed [31:0] multi1;
-    wire signed [31:0] multi2;
-    wire signed [31:0] multi3;
-    wire signed [31:0] multi4;
+    wire signed [45:0] multi0; 
+    wire signed [45:0] multi1;
+    wire signed [45:0] multi2;
+    wire signed [45:0] multi3;
+    wire signed [45:0] multi4;
 
     // Perform the multiplication of the inputs and coefficients
     assign multi0 = input_0 * weight_0;
@@ -53,6 +60,11 @@ module neuron_5in_sigmoid (
 
     // Convert the sum to Q15 format
     assign output_typeconvert = sum >>> 15;
+    assign out_1 = multi0;
+    assign out_2 = multi1;
+    assign out_3 = multi2;
+    assign out_4 = multi3;
+    assign out_5 = multi4;
 
     sigmoid U1 (
         .clock(clock),
@@ -62,5 +74,3 @@ module neuron_5in_sigmoid (
     );
 
 endmodule
-
-

@@ -7,7 +7,7 @@ module mlp_tb;
 
     reg signed [9:0] address;
     reg signed [15:0] inputs [0:49];
-    reg signed [18:0] weight;
+    reg signed [22:0] weight;
 
     // Output
     wire signed [15:0] out;
@@ -17,6 +17,12 @@ module mlp_tb;
     wire signed [22:0] out_3;
     wire signed [22:0] out_4;
     wire signed [22:0] out_5;
+
+    wire signed [45:0] out_1_sig;
+    wire signed [45:0] out_2_sig;
+    wire signed [45:0] out_3_sig;
+    wire signed [45:0] out_4_sig;
+    wire signed [45:0] out_5_sig;
 
     // Instantiate the Perceptron module
     mlp uut (
@@ -84,6 +90,12 @@ module mlp_tb;
         .out_4(out_4),
         .out_5(out_5),
 
+        .out_1_sig(out_1_sig),
+        .out_2_sig(out_2_sig),
+        .out_3_sig(out_3_sig),
+        .out_4_sig(out_4_sig),
+        .out_5_sig(out_5_sig),
+
         .out(out)
     );
 
@@ -98,7 +110,7 @@ module mlp_tb;
         reset = 1;
         #10;
 
-        $readmemb("mem/rings_data_2.mem", inputs);
+        $readmemb("mem/rings_data_10.mem", inputs);
         $readmemb("mem/param.mem", parameters);
 
         // Generate a positive impulse on reset
@@ -129,10 +141,10 @@ module mlp_tb;
         #50;
 
         // Generate a positive impulse on clock
-        // clock = 1; 
-        // #10; 
-        // clock = 0;
-        // #50;
+        clock = 1; 
+        #10; 
+        clock = 0;
+        #50;
 
         // Display the output
         $display("Output: %h %d %f", out, out, out/32768.0);
