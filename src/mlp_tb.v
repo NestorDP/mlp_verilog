@@ -101,6 +101,7 @@ module mlp_tb;
 
     integer i;
     reg signed [18:0] parameters [0:260];
+    reg signed [15:0] targets [0:9];
 
     initial begin
         // Initialize Inputs
@@ -110,8 +111,9 @@ module mlp_tb;
         reset = 1;
         #10;
 
-        $readmemb("mem/rings_data_10.mem", inputs);
+        $readmemb("mem/rings_data_1.mem", inputs);
         $readmemb("mem/param.mem", parameters);
+        $readmemb("mem/targets.mem", targets);
 
         // Generate a positive impulse on reset
         reset = 0;
@@ -120,9 +122,9 @@ module mlp_tb;
         #10; 
 
         // Display the inputs
-        for (i = 0; i <= 260; i = i + 1) begin
-            $display("Weights %d: %b %d %f \tInputs %d: %b %d %f", i, parameters[i], parameters[i], parameters[i]/32768.0, i, inputs[i], inputs[i], inputs[i]/32768.0);
-        end
+        // for (i = 0; i <= 260; i = i + 1) begin
+        //     $display("Weights %d: %b %d %f \tInputs %d: %b %d %f", i, parameters[i], parameters[i], parameters[i]/32768.0, i, inputs[i], inputs[i], inputs[i]/32768.0);
+        // end
 
         // Initialize 
         for (i = 0; i <= 260; i = i + 1) begin
@@ -134,6 +136,7 @@ module mlp_tb;
             #10;
         end
         
+
         // Generate a positive impulse on clock
         clock = 1; 
         #10; 
@@ -147,7 +150,93 @@ module mlp_tb;
         #50;
 
         // Display the output
-        $display("Output: %h %d %f", out, out, out/32768.0);
+        $display("Output 1: %f Target 1: %f", out/32768.0, targets[0]);
+
+
+
+
+        $readmemb("mem/rings_data_2.mem", inputs);
+
+        // Generate a positive impulse on clock
+        clock = 1; 
+        #10; 
+        clock = 0;
+        #50;
+
+        // Generate a positive impulse on clock
+        clock = 1; 
+        #10; 
+        clock = 0;
+        #50;
+
+        // Display the output
+        $display("Output 1: %f Target 1: %f", out/32768.0, targets[1]);
+
+
+
+
+
+        $readmemb("mem/rings_data_3.mem", inputs);
+
+        // Generate a positive impulse on clock
+        clock = 1; 
+        #10; 
+        clock = 0;
+        #50;
+
+        // Generate a positive impulse on clock
+        clock = 1; 
+        #10; 
+        clock = 0;
+        #50;
+
+        // Display the output
+        $display("Output 1: %f Target 1: %f", out/32768.0, targets[2]);
+
+
+
+        $readmemb("mem/rings_data_3.mem", inputs);
+
+        // Generate a positive impulse on clock
+        clock = 1; 
+        #10; 
+        clock = 0;
+        #50;
+
+        // Generate a positive impulse on clock
+        clock = 1; 
+        #10; 
+        clock = 0;
+        #50;
+
+        // Display the output
+        $display("Output 1: %f Target 1: %f", out/32768.0, targets[2]);
+
+
+
+        $readmemb("mem/rings_data_4.mem", inputs);
+
+        // Generate a positive impulse on clock
+        clock = 1; 
+        #10; 
+        clock = 0;
+        #50;
+
+        // Generate a positive impulse on clock
+        clock = 1; 
+        #10; 
+        clock = 0;
+        #50;
+
+        // Display the output
+        $display("Output 1: %f Target 1: %f", out/32768.0, targets[3]);
+
+
+
+
+
+
+
 
         // Finish the simulation
         $finish;
