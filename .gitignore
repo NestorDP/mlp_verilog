@@ -59,7 +59,7 @@ dkms.conf
 *.Xil
 xsim.dir
 
-*.mem
+# *.mem
 
 .vscode/
 
