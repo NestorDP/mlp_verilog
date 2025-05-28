@@ -20,7 +20,7 @@ module neuron_5in_sigmoid (
     input signed [22:0] weight_4,
 
     // Output in Q42 format
-    output signed [45:0] out_1,
+    output signed [22:0] out_1,
     output signed [45:0] out_2,
     output signed [45:0] out_3,
     output signed [45:0] out_4,
@@ -60,7 +60,7 @@ module neuron_5in_sigmoid (
 
     // Convert the sum to Q15 format
     assign output_typeconvert = sum >>> 15;
-    assign out_1 = multi0;
+    assign out_1 = output_typeconvert;
     assign out_2 = multi1;
     assign out_3 = multi2;
     assign out_4 = multi3;

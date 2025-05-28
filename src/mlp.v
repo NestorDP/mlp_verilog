@@ -64,7 +64,7 @@ module mlp (
     output signed [22:0] out_4,
     output signed [22:0] out_5,
 
-    output signed [45:0] out_1_sig,
+    output signed [22:0] out_1_sig,
     output signed [45:0] out_2_sig,
     output signed [45:0] out_3_sig,
     output signed [45:0] out_4_sig,
@@ -1301,7 +1301,7 @@ module mlp (
         .out(out)
     );
 
-    assign out_1 = HIDDEN_WIRE_0;
+    assign out_1 = out_1_sig;
     assign out_2 = HIDDEN_WIRE_1;
     assign out_3 = HIDDEN_WIRE_2;
     assign out_4 = HIDDEN_WIRE_3;
