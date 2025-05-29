@@ -1301,7 +1301,7 @@ module mlp (
         .out(out)
     );
 
-    assign out_1 = out_1_sig;
+    // assign out_1 = HIDDEN_WIRE_0;
     assign out_2 = HIDDEN_WIRE_1;
     assign out_3 = HIDDEN_WIRE_2;
     assign out_4 = HIDDEN_WIRE_3;
