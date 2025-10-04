@@ -26,8 +26,8 @@ SOURCES_VHDL = $(SRC_VHDL) $(SRC_TB_VHDL)
 # Available testbenches
 #---------------------
 TB_FILES = $(shell ls $(TB_DIR)*_tb* 2>/dev/null)
-AVAILABLE_TBS = $(basename $(notdir $(TB_FILES)))
 TB_EXTENSIONS = $(sort $(suffix $(TB_FILES)))
+TB_NAMES = $(basename $(notdir $(TB_FILES)))
 
 # Determine file type based on current TB
 #---------------------
@@ -46,7 +46,6 @@ else ifeq ($(CURRENT_TB_EXTENSION),.vhd)
 else
     FILE_TYPE = unknown
 endif
-
 
 # Running simulation
 #---------------------
@@ -133,7 +132,7 @@ help :
 	@echo "Usage: make [target] [TB=<testbench_name>]"
 	@echo ""
 	@echo "Available testbenches:"
-	@for tb in $(AVAILABLE_TBS); do echo "  - $$tb"; done
+	@for tb in $(TB_NAMES); do echo "  - $$tb"; done
 	@echo ""
 	@echo "Targets:"
 	@echo "  simulate  - Run complete simulation (compile + elaborate + simulate)"
