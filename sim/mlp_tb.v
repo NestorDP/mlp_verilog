@@ -116,10 +116,10 @@ module mlp_tb;
 
 
         // Load the parameters (wights and bias) data from memory files
-        $readmemb("mem/central_barrel/eta1/et6/q15_params_et6_eta1.mem", parameters);
+        $readmemb("../mem/central_barrel/eta1/et6/q15_params_et6_eta1.mem", parameters);
 
         // Load the targets data from memory files
-        $readmemb("mem/central_barrel/eta1/et6/targets_et6_eta1.mem", targets);
+        $readmemb("../mem/central_barrel/eta1/et6/targets_et6_eta1.mem", targets);
 
         // Generate a positive impulse on reset
         reset = 0;
@@ -137,10 +137,10 @@ module mlp_tb;
             #10;
         end
         
-        linear_file = $fopen("mem/central_barrel/eta1/et6/et6_eta1_output_linear.txt", "w");
-        sigmoid_file = $fopen("mem/central_barrel/eta1/et6/et6_eta1_output_sigmoid.txt", "w");
+        linear_file = $fopen("../mem/central_barrel/eta1/et6/et6_eta1_output_linear.txt", "w");
+        sigmoid_file = $fopen("../mem/central_barrel/eta1/et6/et6_eta1_output_sigmoid.txt", "w");
 
-        $readmemb("mem/central_barrel/eta1/et6/rings_data_0_et6_eta1.mem", inputs);
+        $readmemb("../mem/central_barrel/eta1/et6/rings_data_0_et6_eta1.mem", inputs);
         // Generate a positive impulse on clock
         clock = 1; 
         #10; 
@@ -159,7 +159,7 @@ module mlp_tb;
         $fwrite(sigmoid_file,"%f\n", out/32768.0);
 
 
-        $readmemb("mem/central_barrel/eta1/et6/rings_data_1_et6_eta1.mem", inputs);
+        $readmemb("../mem/central_barrel/eta1/et6/rings_data_1_et6_eta1.mem", inputs);
         // Generate a positive impulse on clock
         clock = 1; 
         #10; 
@@ -178,7 +178,7 @@ module mlp_tb;
         $fwrite(sigmoid_file,"%f\n", out/32768.0);
 
 
-        $readmemb("mem/central_barrel/eta1/et6/rings_data_2_et6_eta1.mem", inputs);
+        $readmemb("../mem/central_barrel/eta1/et6/rings_data_2_et6_eta1.mem", inputs);
         // Generate a positive impulse on clock
         clock = 1; 
         #10; 
@@ -197,7 +197,7 @@ module mlp_tb;
         $fwrite(sigmoid_file,"%f\n", out/32768.0);
 
 
-        $readmemb("mem/central_barrel/eta1/et6/rings_data_3_et6_eta1.mem", inputs);
+        $readmemb("../mem/central_barrel/eta1/et6/rings_data_3_et6_eta1.mem", inputs);
         // Generate a positive impulse on clock
         clock = 1; 
         #10; 
@@ -216,7 +216,7 @@ module mlp_tb;
         $fwrite(sigmoid_file,"%f\n", out/32768.0);
 
 
-        $readmemb("mem/central_barrel/eta1/et6/rings_data_4_et6_eta1.mem", inputs);
+        $readmemb("../mem/central_barrel/eta1/et6/rings_data_4_et6_eta1.mem", inputs);
         // Generate a positive impulse on clock
         clock = 1; 
         #10; 
@@ -234,7 +234,7 @@ module mlp_tb;
         $fwrite(linear_file,"%f\n", out_1_sig/32768.0);
         $fwrite(sigmoid_file,"%f\n", out/32768.0);
 
-        $readmemb("mem/central_barrel/eta1/et6/rings_data_5_et6_eta1.mem", inputs);
+        $readmemb("../mem/central_barrel/eta1/et6/rings_data_5_et6_eta1.mem", inputs);
         // Generate a positive impulse on clock
         clock = 1; 
         #10; 
@@ -253,7 +253,7 @@ module mlp_tb;
         $fwrite(sigmoid_file,"%f\n", out/32768.0);
 
 
-        $readmemb("mem/central_barrel/eta1/et6/rings_data_6_et6_eta1.mem", inputs);
+        $readmemb("../mem/central_barrel/eta1/et6/rings_data_6_et6_eta1.mem", inputs);
         // Generate a positive impulse on clock
         clock = 1; 
         #10; 
@@ -272,7 +272,7 @@ module mlp_tb;
         $fwrite(sigmoid_file,"%f\n", out/32768.0);
 
 
-        $readmemb("mem/central_barrel/eta1/et6/rings_data_7_et6_eta1.mem", inputs);
+        $readmemb("../mem/central_barrel/eta1/et6/rings_data_7_et6_eta1.mem", inputs);
         // Generate a positive impulse on clock
         clock = 1; 
         #10; 
@@ -291,7 +291,7 @@ module mlp_tb;
         $fwrite(sigmoid_file,"%f\n", out/32768.0);
 
 
-        $readmemb("mem/central_barrel/eta1/et6/rings_data_8_et6_eta1.mem", inputs);
+        $readmemb("../mem/central_barrel/eta1/et6/rings_data_8_et6_eta1.mem", inputs);
         // Generate a positive impulse on clock
         clock = 1; 
         #10; 
@@ -310,7 +310,7 @@ module mlp_tb;
         $fwrite(sigmoid_file,"%f\n", out/32768.0);
 
 
-        $readmemb("mem/central_barrel/eta1/et6/rings_data_9_et6_eta1.mem", inputs);
+        $readmemb("../mem/central_barrel/eta1/et6/rings_data_9_et6_eta1.mem", inputs);
         // Generate a positive impulse on clock
         clock = 1; 
         #10; 
@@ -329,7 +329,7 @@ module mlp_tb;
         $fwrite(sigmoid_file,"%f\n", out/32768.0);
 
 
-        $readmemb("mem/central_barrel/eta1/et6/rings_data_10_et6_eta1.mem", inputs);
+        $readmemb("../mem/central_barrel/eta1/et6/rings_data_10_et6_eta1.mem", inputs);
         // Generate a positive impulse on clock
         clock = 1; 
         #10; 
@@ -348,7 +348,7 @@ module mlp_tb;
         $fwrite(sigmoid_file,"%f\n", out/32768.0);
 
 
-        $readmemb("mem/central_barrel/eta1/et6/rings_data_11_et6_eta1.mem", inputs);
+        $readmemb("../mem/central_barrel/eta1/et6/rings_data_11_et6_eta1.mem", inputs);
         // Generate a positive impulse on clock
         clock = 1; 
         #10; 
@@ -367,7 +367,7 @@ module mlp_tb;
         $fwrite(sigmoid_file,"%f\n", out/32768.0);
 
 
-        $readmemb("mem/central_barrel/eta1/et6/rings_data_12_et6_eta1.mem", inputs);
+        $readmemb("../mem/central_barrel/eta1/et6/rings_data_12_et6_eta1.mem", inputs);
         // Generate a positive impulse on clock
         clock = 1; 
         #10; 
@@ -386,7 +386,7 @@ module mlp_tb;
         $fwrite(sigmoid_file,"%f\n", out/32768.0);
 
 
-        $readmemb("mem/central_barrel/eta1/et6/rings_data_13_et6_eta1.mem", inputs);
+        $readmemb("../mem/central_barrel/eta1/et6/rings_data_13_et6_eta1.mem", inputs);
         // Generate a positive impulse on clock
         clock = 1; 
         #10; 
@@ -405,7 +405,7 @@ module mlp_tb;
         $fwrite(sigmoid_file,"%f\n", out/32768.0);
 
 
-        $readmemb("mem/central_barrel/eta1/et6/rings_data_14_et6_eta1.mem", inputs);
+        $readmemb("../mem/central_barrel/eta1/et6/rings_data_14_et6_eta1.mem", inputs);
         // Generate a positive impulse on clock
         clock = 1; 
         #10; 
@@ -424,7 +424,7 @@ module mlp_tb;
         $fwrite(sigmoid_file,"%f\n", out/32768.0);
 
 
-        $readmemb("mem/central_barrel/eta1/et6/rings_data_15_et6_eta1.mem", inputs);
+        $readmemb("../mem/central_barrel/eta1/et6/rings_data_15_et6_eta1.mem", inputs);
         // Generate a positive impulse on clock
         clock = 1; 
         #10; 
@@ -443,7 +443,7 @@ module mlp_tb;
         $fwrite(sigmoid_file,"%f\n", out/32768.0);
 
 
-        $readmemb("mem/central_barrel/eta1/et6/rings_data_16_et6_eta1.mem", inputs);
+        $readmemb("../mem/central_barrel/eta1/et6/rings_data_16_et6_eta1.mem", inputs);
         // Generate a positive impulse on clock
         clock = 1; 
         #10; 
@@ -462,7 +462,7 @@ module mlp_tb;
         $fwrite(sigmoid_file,"%f\n", out/32768.0);
 
 
-        $readmemb("mem/central_barrel/eta1/et6/rings_data_17_et6_eta1.mem", inputs);
+        $readmemb("../mem/central_barrel/eta1/et6/rings_data_17_et6_eta1.mem", inputs);
         // Generate a positive impulse on clock
         clock = 1; 
         #10; 
@@ -481,7 +481,7 @@ module mlp_tb;
         $fwrite(sigmoid_file,"%f\n", out/32768.0);
 
 
-        $readmemb("mem/central_barrel/eta1/et6/rings_data_18_et6_eta1.mem", inputs);
+        $readmemb("../mem/central_barrel/eta1/et6/rings_data_18_et6_eta1.mem", inputs);
         // Generate a positive impulse on clock
         clock = 1; 
         #10; 
@@ -500,7 +500,7 @@ module mlp_tb;
         $fwrite(sigmoid_file,"%f\n", out/32768.0);
 
 
-        $readmemb("mem/central_barrel/eta1/et6/rings_data_19_et6_eta1.mem", inputs);
+        $readmemb("../mem/central_barrel/eta1/et6/rings_data_19_et6_eta1.mem", inputs);
         // Generate a positive impulse on clock
         clock = 1; 
         #10; 
