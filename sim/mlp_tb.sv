@@ -1,28 +1,30 @@
+`timescale 1ns/1ps
+
 module mlp_tb;
 
     // Inputs
-    reg clock;
-    reg reset;
-    reg weight_enable;
+    logic clock;
+    logic reset;
+    logic weight_enable;
 
-    reg signed [9:0] address;
-    reg signed [15:0] inputs [0:49];
-    reg signed [22:0] weight;
+    logic signed [9:0] address;
+    logic signed [15:0] inputs [0:49];
+    logic signed [22:0] weight;
 
-    // Output
-    wire signed [15:0] out;
+    // Outputs
+    logic signed [15:0] out;
 
-    wire signed [22:0] out_1;
-    wire signed [22:0] out_2;
-    wire signed [22:0] out_3;
-    wire signed [22:0] out_4;
-    wire signed [22:0] out_5;
+    logic signed [22:0] out_1;
+    logic signed [22:0] out_2;
+    logic signed [22:0] out_3;
+    logic signed [22:0] out_4;
+    logic signed [22:0] out_5;
 
-    wire signed [22:0] out_1_sig;
-    wire signed [45:0] out_2_sig;
-    wire signed [45:0] out_3_sig;
-    wire signed [45:0] out_4_sig;
-    wire signed [45:0] out_5_sig;
+    logic signed [22:0] out_1_sig;
+    logic signed [45:0] out_2_sig;
+    logic signed [45:0] out_3_sig;
+    logic signed [45:0] out_4_sig;
+    logic signed [45:0] out_5_sig;
 
     // Instantiate the Perceptron module
     mlp uut (
@@ -99,12 +101,13 @@ module mlp_tb;
         .out(out)
     );
 
-    integer i;
-    integer linear_file;
-    integer sigmoid_file;
-    reg signed [22:0] parameters [0:260];
-    reg signed [15:0] targets [0:19];
-    reg [8*128:1] fname;
+
+    int i;
+    int linear_file;
+    int sigmoid_file;
+    logic signed [22:0] parameters [0:260];
+    logic signed [15:0] targets [0:19];
+    string fname;
 
     initial begin
         // Initialize Inputs
@@ -114,7 +117,7 @@ module mlp_tb;
         reset = 1;
         #10;
 
-        // Load the parameters (wights and bias) data from memory files
+        // Load the parameters (weights and bias) data from memory files
         $readmemb("../mem/central_barrel/eta1/et6/q15_params_et6_eta1.mem", parameters);
 
         // Load the targets data from memory files
@@ -127,7 +130,7 @@ module mlp_tb;
         #10; 
 
         // Initialize 
-        for (i = 0; i <= 260; i = i + 1) begin
+        for (i = 0; i <= 260; i++) begin
             weight_enable = 0;
             address = i;
             weight = parameters[i];
@@ -135,14 +138,14 @@ module mlp_tb;
             weight_enable = 1;
             #10;
         end
-        
-        linear_file = $fopen("../mem/central_barrel/eta1/et6/et6_eta1_output_linear.txt", "w");
+
+        // Open output files
+        linear_file  = $fopen("../mem/central_barrel/eta1/et6/et6_eta1_output_linear.txt", "w");
         sigmoid_file = $fopen("../mem/central_barrel/eta1/et6/et6_eta1_output_sigmoid.txt", "w");
 
-
-        for (i = 0; i < 20; i = i + 1) begin
-            // Load the inputs data from memory files
-            $swrite(fname, "../mem/central_barrel/eta1/et6/rings_data_%0d_et6_eta1.mem", i);
+        // Process each input set
+        for (i = 0; i < 20; i++) begin
+            fname = $sformatf("../mem/central_barrel/eta1/et6/rings_data_%0d_et6_eta1.mem", i);
             $readmemb(fname, inputs);
 
             repeat (2) begin
