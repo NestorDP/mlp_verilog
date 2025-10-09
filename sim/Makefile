@@ -19,6 +19,10 @@ SRC_VERILOG = $(shell ls $(SRC_DIR)*.v 2>/dev/null)
 SRC_TB_VERILOG = $(shell ls $(TB_DIR)*.v 2>/dev/null)
 SOURCES_VERILOG = $(SRC_VERILOG) $(SRC_TB_VERILOG)
 
+SRC_SYS_VERILOG = $(shell ls $(SRC_DIR)*.sv 2>/dev/null)
+SRC_TB_SYS_VERILOG = $(shell ls $(TB_DIR)*.sv 2>/dev/null)
+SOURCES_SYS_VERILOG = $(SRC_SYS_VERILOG) $(SRC_TB_SYS_VERILOG)
+
 SRC_VHDL = $(shell ls $(SRC_DIR)*.vhdl 2>/dev/null)$(shell ls $(SRC_DIR)*.vhd 2>/dev/null)
 SRC_TB_VHDL = $(shell ls $(TB_DIR)*.vhdl 2>/dev/null)$(shell ls $(TB_DIR)*.vhd 2>/dev/null)
 SOURCES_VHDL = $(SRC_VHDL) $(SRC_TB_VHDL)
@@ -39,6 +43,8 @@ CURRENT_TB_EXTENSION = $(call get-tb-extension,$(TB_TOP))
 
 ifeq ($(CURRENT_TB_EXTENSION),.v)
     FILE_TYPE = VERILOG
+else ifeq ($(CURRENT_TB_EXTENSION),.sv)
+    FILE_TYPE = SYS_VERILOG
 else ifeq ($(CURRENT_TB_EXTENSION),.vhdl)
     FILE_TYPE = VHDL
 else ifeq ($(CURRENT_TB_EXTENSION),.vhd)
@@ -75,6 +81,8 @@ elaborate : compile
 compile :
 ifeq ($(FILE_TYPE),VERILOG)
 	$(MAKE) .comp_v.timestamp
+else ifeq ($(FILE_TYPE),SYS_VERILOG)
+	$(MAKE) .comp_sv.timestamp
 else ifeq ($(FILE_TYPE),VHDL)
 	$(MAKE) .comp_vhdl.timestamp
 else
@@ -90,6 +98,14 @@ endif
 	@echo "### COMPILING VERILOG ###"
 	xvlog $(COMP_OPTS) $(SOURCES_VERILOG)
 	touch .comp_v.timestamp
+
+# Compiling system verilog
+#----------------------
+.comp_sv.timestamp : $(SOURCES_SYS_VERILOG)
+	@echo
+	@echo "### COMPILING SYSTEM VERILOG ###"
+	xvlog $(COMP_OPTS) -sv $(SOURCES_SYS_VERILOG) $(SOURCES_VERILOG)
+	touch .comp_sv.timestamp
 
 # Compiling VHDL
 #---------------------
