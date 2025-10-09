@@ -108,64 +108,83 @@ module mlp_tb;
     logic signed [22:0] parameters [0:260];
     logic signed [15:0] targets [0:19];
     string fname;
+    string linear_file_name;
+    string sigmoid_file_name;
+
+    // Arrays for eta and et values
+    string eta_list [0:1] = '{"eta0", "eta1"};
+    string et_list  [0:4] = '{"et3", "et4", "et5", "et6", "et7"};
 
     initial begin
-        // Initialize Inputs
+        // Loop over all eta and et combinations
+        foreach (eta_list[eta_idx]) begin
+            foreach (et_list[et_idx]) begin
+                string eta, et;
+                eta = eta_list[eta_idx];
+                et  = et_list[et_idx];
 
-        weight_enable = 1;
-        clock = 0;
-        reset = 1;
-        #10;
-
-        // Load the parameters (weights and bias) data from memory files
-        $readmemb("../mem/central_barrel/eta1/et6/q15_params_et6_eta1.mem", parameters);
-
-        // Load the targets data from memory files
-        $readmemb("../mem/central_barrel/eta1/et6/targets_et6_eta1.mem", targets);
-
-        // Generate a positive impulse on reset
-        reset = 0;
-        #5; 
-        reset = 1;
-        #10; 
-
-        // Initialize 
-        for (i = 0; i <= 260; i++) begin
-            weight_enable = 0;
-            address = i;
-            weight = parameters[i];
-            #5;
-            weight_enable = 1;
-            #10;
-        end
-
-        // Open output files
-        linear_file  = $fopen("../mem/central_barrel/eta1/et6/et6_eta1_output_linear.txt", "w");
-        sigmoid_file = $fopen("../mem/central_barrel/eta1/et6/et6_eta1_output_sigmoid.txt", "w");
-
-        // Process each input set
-        for (i = 0; i < 20; i++) begin
-            fname = $sformatf("../mem/central_barrel/eta1/et6/rings_data_%0d_et6_eta1.mem", i);
-            $readmemb(fname, inputs);
-
-            repeat (2) begin
-                // Generate a positive impulse on clock
-                clock = 1; 
+                // Initialize Inputs
+                weight_enable = 1;
+                clock = 0;
+                reset = 1;
                 #10;
-                clock = 0; 
-                #50;
-            end
 
-            // Display the output
-            $display("Antes %0d: %f \t Output %0d: %f \t Target %0d: %d", 
-                    i, out_1_sig/32768.0, i, out/32768.0, i, targets[i]);
-            $fwrite(linear_file,  "%f\n", out_1_sig/32768.0);
-            $fwrite(sigmoid_file, "%f\n", out/32768.0);
-        end
+                // Load the parameters (weights and bias) data from memory files
+                fname = $sformatf("../mem/central_barrel/%s/%s/q15_params_%s_%s.mem", eta, et, et, eta);
+                $readmemb(fname, parameters);
 
-        $fclose(sigmoid_file);
-        $fclose(linear_file);
+                // Load the targets data from memory files
+                fname = $sformatf("../mem/central_barrel/%s/%s/targets_%s_%s.mem", eta, et, et, eta);
+                $readmemb(fname, targets);
 
+                // Generate a positive impulse on reset
+                reset = 0;
+                #5; 
+                reset = 1;
+                #10; 
+
+                // Initialize weights
+                for (i = 0; i <= 260; i++) begin
+                    weight_enable = 0;
+                    address = i;
+                    weight = parameters[i];
+                    #5;
+                    weight_enable = 1;
+                    #10;
+                end
+
+                // Open output files
+ 
+                linear_file_name  = $sformatf("../mem/central_barrel/%s/%s/%s_%s_output_linear.txt", eta, et, et, eta);
+                sigmoid_file_name = $sformatf("../mem/central_barrel/%s/%s/%s_%s_output_sigmoid.txt", eta, et, et, eta);
+                linear_file  = $fopen(linear_file_name, "w");
+                sigmoid_file = $fopen(sigmoid_file_name, "w");
+
+                // Process each input set
+                for (i = 0; i < 20; i++) begin
+                    fname = $sformatf("../mem/central_barrel/%s/%s/rings_data_%0d_%s_%s.mem", eta, et, i, et, eta);
+                    $readmemb(fname, inputs);
+
+                    repeat (2) begin
+                        // Generate a positive impulse on clock
+                        clock = 1; 
+                        #10;
+                        clock = 0; 
+                        #50;
+                    end
+
+                    // Display the output
+                    $display("[%s][%s] Input[%2d]: %10.6f | Output: %8.6f | Target: %d", 
+                             et, eta, i, out_1_sig/32768.0, out/32768.0, targets[i]);
+                    $fwrite(linear_file,  "%f\n", out_1_sig/32768.0);
+                    $fwrite(sigmoid_file, "%f\n", out/32768.0);
+                end
+
+                $fclose(sigmoid_file);
+                $fclose(linear_file);
+
+            end // et_list
+        end // eta_list
 
         // Finish the simulation
         $finish;
