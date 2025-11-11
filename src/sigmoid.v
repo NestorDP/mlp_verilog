@@ -53,9 +53,9 @@ module sigmoid (
     // Define internal signals
     reg signed [31:0] output_register;
 
-    always @ (posedge clock or negedge reset)
+    always @ (posedge clock or posedge reset)
     begin: Output_Register_process
-        if (reset == 1'b0) begin
+        if (reset) begin
             output_register <= 32'd0;
         end
         else begin

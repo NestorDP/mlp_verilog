@@ -107,13 +107,12 @@ module mlp_tb;
 
 
     int i;
-    int linear_file;
-    int sigmoid_file;
+    int output_file;
     logic signed [22:0] parameters [0:260];
     logic signed [15:0] targets [0:19];
     string fname;
-    string linear_file_name;
-    string sigmoid_file_name;
+    string output_file_name;
+
 
     // Arrays for eta and et values
     string eta_list [0:1] = '{"eta0", "eta1"};
@@ -130,8 +129,11 @@ module mlp_tb;
                 // Initialize Inputs
                 weight_enable = 1;
                 clock = 0;
+
+                // Generate a positive impulse on reset                
                 reset = 1;
                 #10;
+                reset = 0;
 
                 // Load the parameters (weights and bias) data from memory files
                 fname = $sformatf("../mem/central_barrel/%s/%s/q15_params_%s_%s.mem", eta, et, et, eta);
@@ -140,29 +142,22 @@ module mlp_tb;
                 // Load the targets data from memory files
                 fname = $sformatf("../mem/central_barrel/%s/%s/targets_%s_%s.mem", eta, et, et, eta);
                 $readmemb(fname, targets);
-
-                // Generate a positive impulse on reset
-                reset = 0;
                 #5; 
-                reset = 1;
-                #10; 
 
                 // Initialize weights
                 for (i = 0; i <= 260; i++) begin
-                    weight_enable = 0;
+                    weight_enable = 1;
                     address = i;
                     weight = parameters[i];
-                    #5;
-                    weight_enable = 1;
-                    #10;
+                    clock = 1; #10;
+                    clock = 0; #10;
                 end
+                weight_enable = 0;
 
-                // Open output files
- 
-                linear_file_name  = $sformatf("../mem/central_barrel/%s/%s/%s_%s_output_linear.txt", eta, et, et, eta);
-                sigmoid_file_name = $sformatf("../mem/central_barrel/%s/%s/%s_%s_output_sigmoid.txt", eta, et, et, eta);
-                linear_file  = $fopen(linear_file_name, "w");
-                sigmoid_file = $fopen(sigmoid_file_name, "w");
+
+                // Open output file
+                output_file_name  = $sformatf("../mem/central_barrel/%s/%s/%s_%s_output.txt", eta, et, et, eta);
+                output_file  = $fopen(output_file_name, "w");
 
                 // Process each input set
                 for (i = 0; i < 20; i++) begin
@@ -178,14 +173,12 @@ module mlp_tb;
                     end
 
                     // Display the output
-                    $display("[%s][%s] Input[%2d]: %10.6f | Output: %8.6f | Target: %d", 
-                             et, eta, i, out_1_sig/32768.0, out/32768.0, targets[i]);
-                    $fwrite(linear_file,  "%f\n", out_1_sig/32768.0);
-                    $fwrite(sigmoid_file, "%f\n", out/32768.0);
+                    $display("[%s][%s] Output linear[%2d]: %10.6f | Output: %8.6f | Target: %d", 
+                             et, eta, i, out_linear/32768.0, out/32768.0, targets[i]);
+                    $fwrite(output_file,  "%f %f\n", out_linear/32768.0, out/32768.0);
                 end
 
-                $fclose(sigmoid_file);
-                $fclose(linear_file);
+                $fclose(output_file);
 
             end // et_list
         end // eta_list
@@ -193,5 +186,4 @@ module mlp_tb;
         // Finish the simulation
         $finish;
     end
-
 endmodule
