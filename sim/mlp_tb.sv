@@ -14,17 +14,19 @@ module mlp_tb;
     // Outputs
     logic signed [15:0] out;
 
-    logic signed [22:0] out_1;
-    logic signed [22:0] out_2;
-    logic signed [22:0] out_3;
-    logic signed [22:0] out_4;
-    logic signed [22:0] out_5;
+    logic signed [22:0] out_neuron_1;
+    logic signed [22:0] out_neuron_2;
+    logic signed [22:0] out_neuron_3;
+    logic signed [22:0] out_neuron_4;
+    logic signed [22:0] out_neuron_5;
+    
+    logic signed [22:0] out_linear;
 
-    logic signed [22:0] out_1_sig;
-    logic signed [45:0] out_2_sig;
-    logic signed [45:0] out_3_sig;
-    logic signed [45:0] out_4_sig;
-    logic signed [45:0] out_5_sig;
+    logic signed [45:0] out_mult0;
+    logic signed [45:0] out_mult1;
+    logic signed [45:0] out_mult2;
+    logic signed [45:0] out_mult3;
+    logic signed [45:0] out_mult4;
 
     // Instantiate the Perceptron module
     mlp uut (
@@ -86,17 +88,19 @@ module mlp_tb;
         .input_48(inputs[48]),
         .input_49(inputs[49]),
 
-        .out_1(out_1),
-        .out_2(out_2),
-        .out_3(out_3),
-        .out_4(out_4),
-        .out_5(out_5),
+        .out_neuron_1(out_neuron_1),
+        .out_neuron_2(out_neuron_2),
+        .out_neuron_3(out_neuron_3),
+        .out_neuron_4(out_neuron_4),
+        .out_neuron_5(out_neuron_5),
 
-        .out_1_sig(out_1_sig),
-        .out_2_sig(out_2_sig),
-        .out_3_sig(out_3_sig),
-        .out_4_sig(out_4_sig),
-        .out_5_sig(out_5_sig),
+        .out_linear(out_linear),
+      
+        .out_mult0(out_mult0),
+        .out_mult1(out_mult1),
+        .out_mult2(out_mult2),
+        .out_mult3(out_mult3),
+        .out_mult4(out_mult4),
 
         .out(out)
     );

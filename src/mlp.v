@@ -58,17 +58,19 @@ module mlp (
     input signed [15:0] input_48,
     input signed [15:0] input_49,
     
-    output signed [22:0] out_1,
-    output signed [22:0] out_2,
-    output signed [22:0] out_3,
-    output signed [22:0] out_4,
-    output signed [22:0] out_5,
+    output signed [22:0] out_neuron_1,
+    output signed [22:0] out_neuron_2,
+    output signed [22:0] out_neuron_3,
+    output signed [22:0] out_neuron_4,
+    output signed [22:0] out_neuron_5,
 
-    output signed [22:0] out_1_sig,
-    output signed [45:0] out_2_sig,
-    output signed [45:0] out_3_sig,
-    output signed [45:0] out_4_sig,
-    output signed [45:0] out_5_sig,
+    output signed [22:0] out_linear,
+
+    output signed [45:0] out_mult0,
+    output signed [45:0] out_mult1,
+    output signed [45:0] out_mult2,
+    output signed [45:0] out_mult3,
+    output signed [45:0] out_mult4,
 
     output signed [15:0] out
 
@@ -1286,25 +1288,25 @@ module mlp (
         .input_3(HIDDEN_WIRE_3),
         .input_4(HIDDEN_WIRE_4),
 
-        .weight_0(mlp_weight_255),
-        .weight_1(mlp_weight_256),
-        .weight_2(mlp_weight_257),
-        .weight_3(mlp_weight_258),
-        .weight_4(mlp_weight_259),
+        .weight_0(mlp_weight[255]),
+        .weight_1(mlp_weight[256]),
+        .weight_2(mlp_weight[257]),
+        .weight_3(mlp_weight[258]),
+        .weight_4(mlp_weight[259]),
+        .out_linear(out_linear),
 
-        .out_1(out_1_sig),
-        .out_2(out_2_sig),
-        .out_3(out_3_sig),
-        .out_4(out_4_sig),
-        .out_5(out_5_sig),
+        .out_mult0(out_mult0),
+        .out_mult1(out_mult1),
+        .out_mult2(out_mult2),
+        .out_mult3(out_mult3),
+        .out_mult4(out_mult4),
         
         .out(out)
     );
 
-    // assign out_1 = HIDDEN_WIRE_0;
-    assign out_2 = HIDDEN_WIRE_1;
-    assign out_3 = HIDDEN_WIRE_2;
-    assign out_4 = HIDDEN_WIRE_3;
-    assign out_5 = HIDDEN_WIRE_4;
-
+    assign out_neuron_1 = HIDDEN_WIRE_0;
+    assign out_neuron_2 = HIDDEN_WIRE_1;
+    assign out_neuron_3 = HIDDEN_WIRE_2;
+    assign out_neuron_4 = HIDDEN_WIRE_3;
+    assign out_neuron_5 = HIDDEN_WIRE_4;
 endmodule

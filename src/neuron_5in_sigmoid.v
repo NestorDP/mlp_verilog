@@ -19,12 +19,15 @@ module neuron_5in_sigmoid (
     input signed [22:0] weight_3,
     input signed [22:0] weight_4,
 
-    // Output in Q42 format
-    output signed [22:0] out_1,
-    output signed [45:0] out_2,
-    output signed [45:0] out_3,
-    output signed [45:0] out_4,
-    output signed [45:0] out_5,
+    // Linear output in Q7.15 format
+    output signed [22:0] out_linear,
+
+    // Multiplier outputs in Q30 format
+    output signed [45:0] out_mult0,
+    output signed [45:0] out_mult1,
+    output signed [45:0] out_mult2,
+    output signed [45:0] out_mult3,
+    output signed [45:0] out_mult4,
 
     // Output in Q15 format
     output signed [15:0] out
@@ -60,12 +63,15 @@ module neuron_5in_sigmoid (
 
     // Convert the sum to Q15 format
     assign output_typeconvert = sum >>> 15;
-    assign out_1 = output_typeconvert;
-    assign out_2 = multi1;
-    assign out_3 = multi2;
-    assign out_4 = multi3;
-    assign out_5 = multi4;
+    assign out_linear = output_typeconvert;
 
+    assign out_mult0 = multi0;
+    assign out_mult1 = multi1;
+    assign out_mult2 = multi2;
+    assign out_mult3 = multi3;
+    assign out_mult4 = multi4;
+
+    // Instantiate the sigmoid module
     sigmoid U1 (
         .clock(clock),
         .reset(reset),
