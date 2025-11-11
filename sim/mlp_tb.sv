@@ -107,7 +107,6 @@ module mlp_tb;
         .out(out)
     );
 
-
     int i;
     int output_file;
     logic signed [22:0] parameters_input [0:260];
@@ -119,6 +118,8 @@ module mlp_tb;
     // Arrays for eta and et values
     string eta_list [0:1] = '{"eta0", "eta1"};
     string et_list  [0:4] = '{"et3", "et4", "et5", "et6", "et7"};
+
+    always #10 clock = ~clock;
 
     initial begin
         // Loop over all eta and et combinations
@@ -145,15 +146,16 @@ module mlp_tb;
                 // Load the targets data from memory files
                 fname = $sformatf("../mem/central_barrel/%s/%s/targets_%s_%s.mem", eta, et, et, eta);
                 $readmemb(fname, targets);
-                #5; 
+                #30; 
 
                 // Initialize parameters
                 for (i = 0; i <= 260; i++) begin
                     write_parameters = 1;
                     address = i;
                     parameters = parameters_input[i];
-                    clock = 1; #10;
-                    clock = 0; #10;
+                    // clock = 1; #10;
+                    // clock = 0; #10;
+                    #25;
                 end
                 write_parameters = 0;
 
@@ -167,13 +169,15 @@ module mlp_tb;
                     fname = $sformatf("../mem/central_barrel/%s/%s/rings_data_%0d_%s_%s.mem", eta, et, i, et, eta);
                     $readmemb(fname, inputs);
 
-                    repeat (2) begin
-                        // Generate a positive impulse on clock
-                        clock = 1; 
-                        #10;
-                        clock = 0; 
-                        #50;
-                    end
+                    #250;
+
+                    // repeat (2) begin
+                    //     // Generate a positive impulse on clock
+                    //     clock = 1; 
+                    //     #10;
+                    //     clock = 0; 
+                    //     #50;
+                    // end
 
                     // Display the output
                     $display("[%s][%s] Output linear[%2d]: %10.6f | Output: %8.6f | Target: %d", 

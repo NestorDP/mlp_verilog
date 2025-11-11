@@ -74,7 +74,6 @@ module mlp (
     output signed [45:0] out_mult4,
 
     output signed [15:0] out
-
 );
 
     wire signed [15:0] INPUT_WIRE_0;
