@@ -5,8 +5,9 @@ module mlp_tb;
     // Inputs
     logic clock;
     logic reset;
-    logic weight_enable;
 
+    logic weight_enable;
+    logic [4:0] select_parameters;
     logic signed [9:0] address;
     logic signed [15:0] inputs [0:49];
     logic signed [22:0] weight;
@@ -32,8 +33,9 @@ module mlp_tb;
     mlp uut (
         .reset(reset),
         .clock(clock),
-        .weight_enable(weight_enable),
 
+        .weight_enable(weight_enable),
+        .select_parameters(select_parameters),
         .address(address),
         .weight(weight),
 
@@ -128,6 +130,7 @@ module mlp_tb;
 
                 // Initialize Inputs
                 weight_enable = 1;
+                select_parameters = 0;
                 clock = 0;
 
                 // Generate a positive impulse on reset                
