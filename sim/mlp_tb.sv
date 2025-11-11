@@ -6,11 +6,11 @@ module mlp_tb;
     logic clock;
     logic reset;
 
-    logic weight_enable;
-    logic [4:0] select_parameters;
+    logic write_parameters;
+    logic [4:0] select_region;
     logic signed [9:0] address;
     logic signed [15:0] inputs [0:49];
-    logic signed [22:0] weight;
+    logic signed [22:0] parameters;
 
     // Outputs
     logic signed [15:0] out;
@@ -34,10 +34,10 @@ module mlp_tb;
         .reset(reset),
         .clock(clock),
 
-        .weight_enable(weight_enable),
-        .select_parameters(select_parameters),
+        .write_parameters(write_parameters),
+        .select_region(select_region),
         .address(address),
-        .weight(weight),
+        .parameters(parameters),
 
         .input_0(inputs[0]),
         .input_1(inputs[1]),
@@ -110,7 +110,7 @@ module mlp_tb;
 
     int i;
     int output_file;
-    logic signed [22:0] parameters [0:260];
+    logic signed [22:0] parameters_input [0:260];
     logic signed [15:0] targets [0:19];
     string fname;
     string output_file_name;
@@ -129,8 +129,8 @@ module mlp_tb;
                 et  = et_list[et_idx];
 
                 // Initialize Inputs
-                weight_enable = 1;
-                select_parameters = 0;
+                write_parameters = 1;
+                select_region = 0;
                 clock = 0;
 
                 // Generate a positive impulse on reset                
@@ -140,22 +140,22 @@ module mlp_tb;
 
                 // Load the parameters (weights and bias) data from memory files
                 fname = $sformatf("../mem/central_barrel/%s/%s/q15_params_%s_%s.mem", eta, et, et, eta);
-                $readmemb(fname, parameters);
+                $readmemb(fname, parameters_input);
 
                 // Load the targets data from memory files
                 fname = $sformatf("../mem/central_barrel/%s/%s/targets_%s_%s.mem", eta, et, et, eta);
                 $readmemb(fname, targets);
                 #5; 
 
-                // Initialize weights
+                // Initialize parameters
                 for (i = 0; i <= 260; i++) begin
-                    weight_enable = 1;
+                    write_parameters = 1;
                     address = i;
-                    weight = parameters[i];
+                    parameters = parameters_input[i];
                     clock = 1; #10;
                     clock = 0; #10;
                 end
-                weight_enable = 0;
+                write_parameters = 0;
 
 
                 // Open output file
