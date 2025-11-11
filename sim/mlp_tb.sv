@@ -109,8 +109,10 @@ module mlp_tb;
 
     int i;
     int output_file;
+    int software_linear_results_file;
     logic signed [22:0] parameters_input [0:260];
     logic signed [15:0] targets [0:19];
+    real software_linear_results [0:19];
     string fname;
     string output_file_name;
 
@@ -124,10 +126,14 @@ module mlp_tb;
     initial begin
         // Loop over all eta and et combinations
         foreach (eta_list[eta_idx]) begin
+
             foreach (et_list[et_idx]) begin
                 string eta, et;
                 eta = eta_list[eta_idx];
                 et  = et_list[et_idx];
+                $display("----------------------------------------------------------------------");
+                $display("                            [%s] [%s]                                 ", eta, et);
+                $display("----------------------------------------------------------------------");
 
                 // Initialize Inputs
                 write_parameters = 1;
@@ -146,6 +152,13 @@ module mlp_tb;
                 // Load the targets data from memory files
                 fname = $sformatf("../mem/central_barrel/%s/%s/targets_%s_%s.mem", eta, et, et, eta);
                 $readmemb(fname, targets);
+
+                software_linear_results_file = $fopen($sformatf("../resultados_software/%s/%s/saida_linear_%s_%s.txt", eta, et, et, eta), "r");
+                for (i = 0; i < 20; i++) begin
+                    $fscanf(software_linear_results_file, "%f", software_linear_results[i]);
+                end
+                $fclose(software_linear_results_file);
+
                 #30; 
 
                 // Initialize parameters
@@ -153,8 +166,6 @@ module mlp_tb;
                     write_parameters = 1;
                     address = i;
                     parameters = parameters_input[i];
-                    // clock = 1; #10;
-                    // clock = 0; #10;
                     #25;
                 end
                 write_parameters = 0;
@@ -171,18 +182,10 @@ module mlp_tb;
 
                     #250;
 
-                    // repeat (2) begin
-                    //     // Generate a positive impulse on clock
-                    //     clock = 1; 
-                    //     #10;
-                    //     clock = 0; 
-                    //     #50;
-                    // end
-
                     // Display the output
-                    $display("[%s][%s] Output linear[%2d]: %10.6f | Output: %8.6f | Target: %d", 
-                             et, eta, i, out_linear/32768.0, out/32768.0, targets[i]);
-                    $fwrite(output_file,  "%f %f\n", out_linear/32768.0, out/32768.0);
+                    $display("Output[%2d] Hardware: %10.6f | Software: %8.6f", 
+                            i, out_linear/32768.0, software_linear_results[i]);
+                    $fwrite(output_file,  "%f\n", out_linear/32768.0);
                 end
 
                 $fclose(output_file);

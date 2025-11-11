@@ -64,3 +64,5 @@ xsim.dir
 .vscode/
 
 *.wcfg
+
+.venv*
