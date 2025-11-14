@@ -147,9 +147,9 @@ module mlp_tb;
                 eta = eta_list[eta_idx];
                 et  = et_list[et_idx];
                 $display("----------------------------------------------------------------------");
-                $display("                            [%s] [%s]                                 ", eta, et);
+                $display("     Output Comparison: Hardware vs. Software for Region [%s] [%s]      ", eta, et);
                 $display("----------------------------------------------------------------------");
-
+                $display("            Hardware   Software");
                 // Initialize Inputs
                 write_parameters = 1;
                 select_region = 0;
@@ -200,7 +200,7 @@ module mlp_tb;
                     #250;
 
                     // Display the output
-                    $display("Output[%2d] Hardware: %10.6f | Software: %8.6f", 
+                    $display("    [%2d]  %10.6f | %8.6f", 
                             i, out_linear/32768.0, software_linear_results[i]);
                     $fwrite(output_file,  "%f\n", out_linear/32768.0);
                 end
