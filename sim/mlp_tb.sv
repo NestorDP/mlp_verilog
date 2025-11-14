@@ -2,35 +2,50 @@
 
 module mlp_tb;
 
+    // Define Parameters
+    parameter ADDR_WIDTH        = 5;  // select_region width (actually 5 bits uses [4:0])
+    parameter ADDR_SIGNED_WIDTH = 10; // address width
+    parameter MULT_WIDTH        = 46; // Width for 'out_mult' signals
+    parameter INPUT_DEPTH       = 50; // Size of the 'inputs' array
+
+    parameter Q_FRACTIONAL = 15;
+    parameter Q_INTEGER    = 7;
+
+    parameter INPUT_WIDTH       = Q_FRACTIONAL + 1; // Width for 'inputs' and 'out'
+    parameter PARAM_WIDTH       = 23; // Width for 'parameters' and intermediate 'out_neuron' signals
+
     // Inputs
     logic clock;
     logic reset;
 
     logic write_parameters;
-    logic [4:0] select_region;
-    logic signed [9:0] address;
-    logic signed [15:0] inputs [0:49];
-    logic signed [22:0] parameters;
+    logic [ADDR_WIDTH-1:0] select_region;
+    logic signed [ADDR_SIGNED_WIDTH-1:0] address;
+    logic signed [INPUT_WIDTH-1:0] inputs [0:INPUT_DEPTH-1];
+    logic signed [PARAM_WIDTH-1:0] parameters;
 
     // Outputs
-    logic signed [15:0] out;
+    logic signed [INPUT_WIDTH-1:0] out;
 
-    logic signed [22:0] out_neuron_1;
-    logic signed [22:0] out_neuron_2;
-    logic signed [22:0] out_neuron_3;
-    logic signed [22:0] out_neuron_4;
-    logic signed [22:0] out_neuron_5;
+    logic signed [PARAM_WIDTH-1:0] out_neuron_1;
+    logic signed [PARAM_WIDTH-1:0] out_neuron_2;
+    logic signed [PARAM_WIDTH-1:0] out_neuron_3;
+    logic signed [PARAM_WIDTH-1:0] out_neuron_4;
+    logic signed [PARAM_WIDTH-1:0] out_neuron_5;
     
-    logic signed [22:0] out_linear;
+    logic signed [PARAM_WIDTH-1:0] out_linear;
 
-    logic signed [45:0] out_mult0;
-    logic signed [45:0] out_mult1;
-    logic signed [45:0] out_mult2;
-    logic signed [45:0] out_mult3;
-    logic signed [45:0] out_mult4;
+    logic signed [MULT_WIDTH-1:0] out_mult0;
+    logic signed [MULT_WIDTH-1:0] out_mult1;
+    logic signed [MULT_WIDTH-1:0] out_mult2;
+    logic signed [MULT_WIDTH-1:0] out_mult3;
+    logic signed [MULT_WIDTH-1:0] out_mult4;
 
     // Instantiate the Perceptron module
-    mlp uut (
+    mlp  # (
+        .Q_FRACTIONAL(15),
+        .Q_INTEGER(7)
+    ) uut (
         .reset(reset),
         .clock(clock),
 
@@ -132,9 +147,9 @@ module mlp_tb;
                 eta = eta_list[eta_idx];
                 et  = et_list[et_idx];
                 $display("----------------------------------------------------------------------");
-                $display("                            [%s] [%s]                                 ", eta, et);
+                $display("     Output Comparison: Hardware vs. Software for Region [%s] [%s]      ", eta, et);
                 $display("----------------------------------------------------------------------");
-
+                $display("            Hardware   Software");
                 // Initialize Inputs
                 write_parameters = 1;
                 select_region = 0;
@@ -145,14 +160,15 @@ module mlp_tb;
                 #10;
                 reset = 0;
 
-                // Load the parameters (weights and bias) data from memory files
-                fname = $sformatf("../mem/central_barrel/%s/%s/q15_params_%s_%s.mem", eta, et, et, eta);
-                $readmemb(fname, parameters_input);
-
                 // Load the targets data from memory files
                 fname = $sformatf("../mem/central_barrel/%s/%s/targets_%s_%s.mem", eta, et, et, eta);
                 $readmemb(fname, targets);
 
+                // Load the parameters (weights and bias) data from memory files
+                fname = $sformatf("../mem/central_barrel/%s/%s/q15_params_%s_%s.mem", eta, et, et, eta);
+                $readmemb(fname, parameters_input);
+
+                // Load the software linear results for comparison
                 software_linear_results_file = $fopen($sformatf("../resultados_software/%s/%s/saida_linear_%s_%s.txt", eta, et, et, eta), "r");
                 for (i = 0; i < 20; i++) begin
                     $fscanf(software_linear_results_file, "%f", software_linear_results[i]);
@@ -161,7 +177,8 @@ module mlp_tb;
 
                 #30; 
 
-                // Initialize parameters
+                // Initialize parameters loading process
+                // Load parameters into the MLP module
                 for (i = 0; i <= 260; i++) begin
                     write_parameters = 1;
                     address = i;
@@ -183,7 +200,7 @@ module mlp_tb;
                     #250;
 
                     // Display the output
-                    $display("Output[%2d] Hardware: %10.6f | Software: %8.6f", 
+                    $display("    [%2d]  %10.6f | %8.6f", 
                             i, out_linear/32768.0, software_linear_results[i]);
                     $fwrite(output_file,  "%f\n", out_linear/32768.0);
                 end

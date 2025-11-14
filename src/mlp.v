@@ -1,71 +1,74 @@
-module mlp (
+module mlp #(
+    parameter Q_FRACTIONAL = 15,
+    parameter Q_INTEGER    = 7
+)(
     input wire clock,
     input wire reset,
 
     input wire   write_parameters,
     input        [4:0] select_region,
     input        [9:0] address,
-    input signed [22:0] parameters,
+    input signed [Q_INTEGER+Q_FRACTIONAL:0] parameters,
         
     // 50 inputs in Q15 format
-    input signed [15:0] input_0,
-    input signed [15:0] input_1,
-    input signed [15:0] input_2,
-    input signed [15:0] input_3,
-    input signed [15:0] input_4,
-    input signed [15:0] input_5,
-    input signed [15:0] input_6,
-    input signed [15:0] input_7,
-    input signed [15:0] input_8,
-    input signed [15:0] input_9,
-    input signed [15:0] input_10,
-    input signed [15:0] input_11,
-    input signed [15:0] input_12,
-    input signed [15:0] input_13,
-    input signed [15:0] input_14,
-    input signed [15:0] input_15,
-    input signed [15:0] input_16,
-    input signed [15:0] input_17,
-    input signed [15:0] input_18,
-    input signed [15:0] input_19,
-    input signed [15:0] input_20,
-    input signed [15:0] input_21,
-    input signed [15:0] input_22,
-    input signed [15:0] input_23,
-    input signed [15:0] input_24,
-    input signed [15:0] input_25,
-    input signed [15:0] input_26,
-    input signed [15:0] input_27,
-    input signed [15:0] input_28,
-    input signed [15:0] input_29,
-    input signed [15:0] input_30,
-    input signed [15:0] input_31,
-    input signed [15:0] input_32,
-    input signed [15:0] input_33,
-    input signed [15:0] input_34,
-    input signed [15:0] input_35,
-    input signed [15:0] input_36,
-    input signed [15:0] input_37,
-    input signed [15:0] input_38,
-    input signed [15:0] input_39,
-    input signed [15:0] input_40,
-    input signed [15:0] input_41,
-    input signed [15:0] input_42,
-    input signed [15:0] input_43,
-    input signed [15:0] input_44,
-    input signed [15:0] input_45,
-    input signed [15:0] input_46,
-    input signed [15:0] input_47,
-    input signed [15:0] input_48,
-    input signed [15:0] input_49,
+    input signed [Q_FRACTIONAL:0] input_0,
+    input signed [Q_FRACTIONAL:0] input_1,
+    input signed [Q_FRACTIONAL:0] input_2,
+    input signed [Q_FRACTIONAL:0] input_3,
+    input signed [Q_FRACTIONAL:0] input_4,
+    input signed [Q_FRACTIONAL:0] input_5,
+    input signed [Q_FRACTIONAL:0] input_6,
+    input signed [Q_FRACTIONAL:0] input_7,
+    input signed [Q_FRACTIONAL:0] input_8,
+    input signed [Q_FRACTIONAL:0] input_9,
+    input signed [Q_FRACTIONAL:0] input_10,
+    input signed [Q_FRACTIONAL:0] input_11,
+    input signed [Q_FRACTIONAL:0] input_12,
+    input signed [Q_FRACTIONAL:0] input_13,
+    input signed [Q_FRACTIONAL:0] input_14,
+    input signed [Q_FRACTIONAL:0] input_15,
+    input signed [Q_FRACTIONAL:0] input_16,
+    input signed [Q_FRACTIONAL:0] input_17,
+    input signed [Q_FRACTIONAL:0] input_18,
+    input signed [Q_FRACTIONAL:0] input_19,
+    input signed [Q_FRACTIONAL:0] input_20,
+    input signed [Q_FRACTIONAL:0] input_21,
+    input signed [Q_FRACTIONAL:0] input_22,
+    input signed [Q_FRACTIONAL:0] input_23,
+    input signed [Q_FRACTIONAL:0] input_24,
+    input signed [Q_FRACTIONAL:0] input_25,
+    input signed [Q_FRACTIONAL:0] input_26,
+    input signed [Q_FRACTIONAL:0] input_27,
+    input signed [Q_FRACTIONAL:0] input_28,
+    input signed [Q_FRACTIONAL:0] input_29,
+    input signed [Q_FRACTIONAL:0] input_30,
+    input signed [Q_FRACTIONAL:0] input_31,
+    input signed [Q_FRACTIONAL:0] input_32,
+    input signed [Q_FRACTIONAL:0] input_33,
+    input signed [Q_FRACTIONAL:0] input_34,
+    input signed [Q_FRACTIONAL:0] input_35,
+    input signed [Q_FRACTIONAL:0] input_36,
+    input signed [Q_FRACTIONAL:0] input_37,
+    input signed [Q_FRACTIONAL:0] input_38,
+    input signed [Q_FRACTIONAL:0] input_39,
+    input signed [Q_FRACTIONAL:0] input_40,
+    input signed [Q_FRACTIONAL:0] input_41,
+    input signed [Q_FRACTIONAL:0] input_42,
+    input signed [Q_FRACTIONAL:0] input_43,
+    input signed [Q_FRACTIONAL:0] input_44,
+    input signed [Q_FRACTIONAL:0] input_45,
+    input signed [Q_FRACTIONAL:0] input_46,
+    input signed [Q_FRACTIONAL:0] input_47,
+    input signed [Q_FRACTIONAL:0] input_48,
+    input signed [Q_FRACTIONAL:0] input_49,
     
-    output signed [22:0] out_neuron_1,
-    output signed [22:0] out_neuron_2,
-    output signed [22:0] out_neuron_3,
-    output signed [22:0] out_neuron_4,
-    output signed [22:0] out_neuron_5,
+    output signed [Q_INTEGER+Q_FRACTIONAL:0] out_neuron_1,
+    output signed [Q_INTEGER+Q_FRACTIONAL:0] out_neuron_2,
+    output signed [Q_INTEGER+Q_FRACTIONAL:0] out_neuron_3,
+    output signed [Q_INTEGER+Q_FRACTIONAL:0] out_neuron_4,
+    output signed [Q_INTEGER+Q_FRACTIONAL:0] out_neuron_5,
 
-    output signed [22:0] out_linear,
+    output signed [Q_INTEGER+Q_FRACTIONAL:0] out_linear,
 
     output signed [45:0] out_mult0,
     output signed [45:0] out_mult1,
@@ -73,65 +76,65 @@ module mlp (
     output signed [45:0] out_mult3,
     output signed [45:0] out_mult4,
 
-    output signed [15:0] out
+    output signed [Q_FRACTIONAL:0] out
 );
 
-    wire signed [15:0] INPUT_WIRE_0;
-    wire signed [15:0] INPUT_WIRE_1;
-    wire signed [15:0] INPUT_WIRE_2;
-    wire signed [15:0] INPUT_WIRE_3;
-    wire signed [15:0] INPUT_WIRE_4;
-    wire signed [15:0] INPUT_WIRE_5;
-    wire signed [15:0] INPUT_WIRE_6;
-    wire signed [15:0] INPUT_WIRE_7;
-    wire signed [15:0] INPUT_WIRE_8;
-    wire signed [15:0] INPUT_WIRE_9;
-    wire signed [15:0] INPUT_WIRE_10;
-    wire signed [15:0] INPUT_WIRE_11;
-    wire signed [15:0] INPUT_WIRE_12;
-    wire signed [15:0] INPUT_WIRE_13;
-    wire signed [15:0] INPUT_WIRE_14;
-    wire signed [15:0] INPUT_WIRE_15;
-    wire signed [15:0] INPUT_WIRE_16;
-    wire signed [15:0] INPUT_WIRE_17;
-    wire signed [15:0] INPUT_WIRE_18;
-    wire signed [15:0] INPUT_WIRE_19;
-    wire signed [15:0] INPUT_WIRE_20;
-    wire signed [15:0] INPUT_WIRE_21;
-    wire signed [15:0] INPUT_WIRE_22;
-    wire signed [15:0] INPUT_WIRE_23;
-    wire signed [15:0] INPUT_WIRE_24;
-    wire signed [15:0] INPUT_WIRE_25;
-    wire signed [15:0] INPUT_WIRE_26;
-    wire signed [15:0] INPUT_WIRE_27;
-    wire signed [15:0] INPUT_WIRE_28;
-    wire signed [15:0] INPUT_WIRE_29;
-    wire signed [15:0] INPUT_WIRE_30;
-    wire signed [15:0] INPUT_WIRE_31;
-    wire signed [15:0] INPUT_WIRE_32;
-    wire signed [15:0] INPUT_WIRE_33;
-    wire signed [15:0] INPUT_WIRE_34;
-    wire signed [15:0] INPUT_WIRE_35;
-    wire signed [15:0] INPUT_WIRE_36;
-    wire signed [15:0] INPUT_WIRE_37;
-    wire signed [15:0] INPUT_WIRE_38;
-    wire signed [15:0] INPUT_WIRE_39;
-    wire signed [15:0] INPUT_WIRE_40;
-    wire signed [15:0] INPUT_WIRE_41;
-    wire signed [15:0] INPUT_WIRE_42;
-    wire signed [15:0] INPUT_WIRE_43;
-    wire signed [15:0] INPUT_WIRE_44;
-    wire signed [15:0] INPUT_WIRE_45;
-    wire signed [15:0] INPUT_WIRE_46;
-    wire signed [15:0] INPUT_WIRE_47;
-    wire signed [15:0] INPUT_WIRE_48;
-    wire signed [15:0] INPUT_WIRE_49;
+    wire signed [Q_FRACTIONAL:0] INPUT_WIRE_0;
+    wire signed [Q_FRACTIONAL:0] INPUT_WIRE_1;
+    wire signed [Q_FRACTIONAL:0] INPUT_WIRE_2;
+    wire signed [Q_FRACTIONAL:0] INPUT_WIRE_3;
+    wire signed [Q_FRACTIONAL:0] INPUT_WIRE_4;
+    wire signed [Q_FRACTIONAL:0] INPUT_WIRE_5;
+    wire signed [Q_FRACTIONAL:0] INPUT_WIRE_6;
+    wire signed [Q_FRACTIONAL:0] INPUT_WIRE_7;
+    wire signed [Q_FRACTIONAL:0] INPUT_WIRE_8;
+    wire signed [Q_FRACTIONAL:0] INPUT_WIRE_9;
+    wire signed [Q_FRACTIONAL:0] INPUT_WIRE_10;
+    wire signed [Q_FRACTIONAL:0] INPUT_WIRE_11;
+    wire signed [Q_FRACTIONAL:0] INPUT_WIRE_12;
+    wire signed [Q_FRACTIONAL:0] INPUT_WIRE_13;
+    wire signed [Q_FRACTIONAL:0] INPUT_WIRE_14;
+    wire signed [Q_FRACTIONAL:0] INPUT_WIRE_15;
+    wire signed [Q_FRACTIONAL:0] INPUT_WIRE_16;
+    wire signed [Q_FRACTIONAL:0] INPUT_WIRE_17;
+    wire signed [Q_FRACTIONAL:0] INPUT_WIRE_18;
+    wire signed [Q_FRACTIONAL:0] INPUT_WIRE_19;
+    wire signed [Q_FRACTIONAL:0] INPUT_WIRE_20;
+    wire signed [Q_FRACTIONAL:0] INPUT_WIRE_21;
+    wire signed [Q_FRACTIONAL:0] INPUT_WIRE_22;
+    wire signed [Q_FRACTIONAL:0] INPUT_WIRE_23;
+    wire signed [Q_FRACTIONAL:0] INPUT_WIRE_24;
+    wire signed [Q_FRACTIONAL:0] INPUT_WIRE_25;
+    wire signed [Q_FRACTIONAL:0] INPUT_WIRE_26;
+    wire signed [Q_FRACTIONAL:0] INPUT_WIRE_27;
+    wire signed [Q_FRACTIONAL:0] INPUT_WIRE_28;
+    wire signed [Q_FRACTIONAL:0] INPUT_WIRE_29;
+    wire signed [Q_FRACTIONAL:0] INPUT_WIRE_30;
+    wire signed [Q_FRACTIONAL:0] INPUT_WIRE_31;
+    wire signed [Q_FRACTIONAL:0] INPUT_WIRE_32;
+    wire signed [Q_FRACTIONAL:0] INPUT_WIRE_33;
+    wire signed [Q_FRACTIONAL:0] INPUT_WIRE_34;
+    wire signed [Q_FRACTIONAL:0] INPUT_WIRE_35;
+    wire signed [Q_FRACTIONAL:0] INPUT_WIRE_36;
+    wire signed [Q_FRACTIONAL:0] INPUT_WIRE_37;
+    wire signed [Q_FRACTIONAL:0] INPUT_WIRE_38;
+    wire signed [Q_FRACTIONAL:0] INPUT_WIRE_39;
+    wire signed [Q_FRACTIONAL:0] INPUT_WIRE_40;
+    wire signed [Q_FRACTIONAL:0] INPUT_WIRE_41;
+    wire signed [Q_FRACTIONAL:0] INPUT_WIRE_42;
+    wire signed [Q_FRACTIONAL:0] INPUT_WIRE_43;
+    wire signed [Q_FRACTIONAL:0] INPUT_WIRE_44;
+    wire signed [Q_FRACTIONAL:0] INPUT_WIRE_45;
+    wire signed [Q_FRACTIONAL:0] INPUT_WIRE_46;
+    wire signed [Q_FRACTIONAL:0] INPUT_WIRE_47;
+    wire signed [Q_FRACTIONAL:0] INPUT_WIRE_48;
+    wire signed [Q_FRACTIONAL:0] INPUT_WIRE_49;
 
-    wire signed [22:0] HIDDEN_WIRE_0;
-    wire signed [22:0] HIDDEN_WIRE_1;
-    wire signed [22:0] HIDDEN_WIRE_2;
-    wire signed [22:0] HIDDEN_WIRE_3;
-    wire signed [22:0] HIDDEN_WIRE_4;
+    wire signed [Q_INTEGER+Q_FRACTIONAL:0] HIDDEN_WIRE_0;
+    wire signed [Q_INTEGER+Q_FRACTIONAL:0] HIDDEN_WIRE_1;
+    wire signed [Q_INTEGER+Q_FRACTIONAL:0] HIDDEN_WIRE_2;
+    wire signed [Q_INTEGER+Q_FRACTIONAL:0] HIDDEN_WIRE_3;
+    wire signed [Q_INTEGER+Q_FRACTIONAL:0] HIDDEN_WIRE_4;
 
     assign INPUT_WIRE_0 = input_0;
     assign INPUT_WIRE_1 = input_1;
@@ -188,7 +191,7 @@ module mlp (
     //  attribute hints the synthesizer to implement this as block RAM
     (* ram_style = "block" *)
     // 25(parameters network) * 261(parameters per network) = 6525
-    reg signed [22:0] parameter_registers [0:6524];
+    reg signed [Q_INTEGER+Q_FRACTIONAL:0] parameter_registers [1:6525];
     // select_region * 261 + address
     wire [12:0] write_addr = (select_region << 8) + (select_region << 2) + 1 + address;
         
@@ -199,7 +202,10 @@ module mlp (
     end
 
     // Instantiate neuron_50in_relu
-    neuron_50in_relu U1 (
+    neuron_50in_relu # (
+        .Q_FRACTIONAL(Q_FRACTIONAL),
+        .Q_INTEGER(Q_INTEGER)
+    ) U1 (
         .clock(clock),
         .reset(reset),
 
@@ -309,7 +315,10 @@ module mlp (
         .out(HIDDEN_WIRE_0)
     );
 
-    neuron_50in_relu U2 (
+    neuron_50in_relu # (
+        .Q_FRACTIONAL(Q_FRACTIONAL),
+        .Q_INTEGER(Q_INTEGER)
+    ) U2 (
         .clock(clock),
         .reset(reset),
 
@@ -419,7 +428,10 @@ module mlp (
         .out(HIDDEN_WIRE_1)
     );
 
-    neuron_50in_relu U3 (
+    neuron_50in_relu # (
+        .Q_FRACTIONAL(Q_FRACTIONAL),
+        .Q_INTEGER(Q_INTEGER)
+    ) U3 (
         .clock(clock),
         .reset(reset),
 
@@ -529,7 +541,10 @@ module mlp (
         .out(HIDDEN_WIRE_2)
     );
 
-    neuron_50in_relu U4 (
+    neuron_50in_relu # (
+        .Q_FRACTIONAL(Q_FRACTIONAL),
+        .Q_INTEGER(Q_INTEGER)
+    ) U4 (
         .clock(clock),
         .reset(reset),
 
@@ -639,7 +654,10 @@ module mlp (
         .out(HIDDEN_WIRE_3)
     );
 
-    neuron_50in_relu U5 (
+    neuron_50in_relu # (
+        .Q_FRACTIONAL(Q_FRACTIONAL),
+        .Q_INTEGER(Q_INTEGER)
+    ) U5 (
         .clock(clock),
         .reset(reset),
 
@@ -749,7 +767,10 @@ module mlp (
         .out(HIDDEN_WIRE_4)
     );
 
-    neuron_5in_sigmoid U6 (
+    neuron_5in_sigmoid # (
+        .Q_FRACTIONAL(Q_FRACTIONAL),
+        .Q_INTEGER(Q_INTEGER)
+    ) U6 (
         .clock(clock),
         .reset(reset),
 
