@@ -1,71 +1,71 @@
-module mlp (
+module mlp #(parameter QWIDTH = 15)(
     input wire clock,
     input wire reset,
 
     input wire   write_parameters,
     input        [4:0] select_region,
     input        [9:0] address,
-    input signed [22:0] parameters,
+    input signed [QWIDTH+7:0] parameters,
         
     // 50 inputs in Q15 format
-    input signed [15:0] input_0,
-    input signed [15:0] input_1,
-    input signed [15:0] input_2,
-    input signed [15:0] input_3,
-    input signed [15:0] input_4,
-    input signed [15:0] input_5,
-    input signed [15:0] input_6,
-    input signed [15:0] input_7,
-    input signed [15:0] input_8,
-    input signed [15:0] input_9,
-    input signed [15:0] input_10,
-    input signed [15:0] input_11,
-    input signed [15:0] input_12,
-    input signed [15:0] input_13,
-    input signed [15:0] input_14,
-    input signed [15:0] input_15,
-    input signed [15:0] input_16,
-    input signed [15:0] input_17,
-    input signed [15:0] input_18,
-    input signed [15:0] input_19,
-    input signed [15:0] input_20,
-    input signed [15:0] input_21,
-    input signed [15:0] input_22,
-    input signed [15:0] input_23,
-    input signed [15:0] input_24,
-    input signed [15:0] input_25,
-    input signed [15:0] input_26,
-    input signed [15:0] input_27,
-    input signed [15:0] input_28,
-    input signed [15:0] input_29,
-    input signed [15:0] input_30,
-    input signed [15:0] input_31,
-    input signed [15:0] input_32,
-    input signed [15:0] input_33,
-    input signed [15:0] input_34,
-    input signed [15:0] input_35,
-    input signed [15:0] input_36,
-    input signed [15:0] input_37,
-    input signed [15:0] input_38,
-    input signed [15:0] input_39,
-    input signed [15:0] input_40,
-    input signed [15:0] input_41,
-    input signed [15:0] input_42,
-    input signed [15:0] input_43,
-    input signed [15:0] input_44,
-    input signed [15:0] input_45,
-    input signed [15:0] input_46,
-    input signed [15:0] input_47,
-    input signed [15:0] input_48,
-    input signed [15:0] input_49,
+    input signed [QWIDTH:0] input_0,
+    input signed [QWIDTH:0] input_1,
+    input signed [QWIDTH:0] input_2,
+    input signed [QWIDTH:0] input_3,
+    input signed [QWIDTH:0] input_4,
+    input signed [QWIDTH:0] input_5,
+    input signed [QWIDTH:0] input_6,
+    input signed [QWIDTH:0] input_7,
+    input signed [QWIDTH:0] input_8,
+    input signed [QWIDTH:0] input_9,
+    input signed [QWIDTH:0] input_10,
+    input signed [QWIDTH:0] input_11,
+    input signed [QWIDTH:0] input_12,
+    input signed [QWIDTH:0] input_13,
+    input signed [QWIDTH:0] input_14,
+    input signed [QWIDTH:0] input_15,
+    input signed [QWIDTH:0] input_16,
+    input signed [QWIDTH:0] input_17,
+    input signed [QWIDTH:0] input_18,
+    input signed [QWIDTH:0] input_19,
+    input signed [QWIDTH:0] input_20,
+    input signed [QWIDTH:0] input_21,
+    input signed [QWIDTH:0] input_22,
+    input signed [QWIDTH:0] input_23,
+    input signed [QWIDTH:0] input_24,
+    input signed [QWIDTH:0] input_25,
+    input signed [QWIDTH:0] input_26,
+    input signed [QWIDTH:0] input_27,
+    input signed [QWIDTH:0] input_28,
+    input signed [QWIDTH:0] input_29,
+    input signed [QWIDTH:0] input_30,
+    input signed [QWIDTH:0] input_31,
+    input signed [QWIDTH:0] input_32,
+    input signed [QWIDTH:0] input_33,
+    input signed [QWIDTH:0] input_34,
+    input signed [QWIDTH:0] input_35,
+    input signed [QWIDTH:0] input_36,
+    input signed [QWIDTH:0] input_37,
+    input signed [QWIDTH:0] input_38,
+    input signed [QWIDTH:0] input_39,
+    input signed [QWIDTH:0] input_40,
+    input signed [QWIDTH:0] input_41,
+    input signed [QWIDTH:0] input_42,
+    input signed [QWIDTH:0] input_43,
+    input signed [QWIDTH:0] input_44,
+    input signed [QWIDTH:0] input_45,
+    input signed [QWIDTH:0] input_46,
+    input signed [QWIDTH:0] input_47,
+    input signed [QWIDTH:0] input_48,
+    input signed [QWIDTH:0] input_49,
     
-    output signed [22:0] out_neuron_1,
-    output signed [22:0] out_neuron_2,
-    output signed [22:0] out_neuron_3,
-    output signed [22:0] out_neuron_4,
-    output signed [22:0] out_neuron_5,
+    output signed [QWIDTH+7:0] out_neuron_1,
+    output signed [QWIDTH+7:0] out_neuron_2,
+    output signed [QWIDTH+7:0] out_neuron_3,
+    output signed [QWIDTH+7:0] out_neuron_4,
+    output signed [QWIDTH+7:0] out_neuron_5,
 
-    output signed [22:0] out_linear,
+    output signed [QWIDTH+7:0] out_linear,
 
     output signed [45:0] out_mult0,
     output signed [45:0] out_mult1,
@@ -73,65 +73,65 @@ module mlp (
     output signed [45:0] out_mult3,
     output signed [45:0] out_mult4,
 
-    output signed [15:0] out
+    output signed [QWIDTH:0] out
 );
 
-    wire signed [15:0] INPUT_WIRE_0;
-    wire signed [15:0] INPUT_WIRE_1;
-    wire signed [15:0] INPUT_WIRE_2;
-    wire signed [15:0] INPUT_WIRE_3;
-    wire signed [15:0] INPUT_WIRE_4;
-    wire signed [15:0] INPUT_WIRE_5;
-    wire signed [15:0] INPUT_WIRE_6;
-    wire signed [15:0] INPUT_WIRE_7;
-    wire signed [15:0] INPUT_WIRE_8;
-    wire signed [15:0] INPUT_WIRE_9;
-    wire signed [15:0] INPUT_WIRE_10;
-    wire signed [15:0] INPUT_WIRE_11;
-    wire signed [15:0] INPUT_WIRE_12;
-    wire signed [15:0] INPUT_WIRE_13;
-    wire signed [15:0] INPUT_WIRE_14;
-    wire signed [15:0] INPUT_WIRE_15;
-    wire signed [15:0] INPUT_WIRE_16;
-    wire signed [15:0] INPUT_WIRE_17;
-    wire signed [15:0] INPUT_WIRE_18;
-    wire signed [15:0] INPUT_WIRE_19;
-    wire signed [15:0] INPUT_WIRE_20;
-    wire signed [15:0] INPUT_WIRE_21;
-    wire signed [15:0] INPUT_WIRE_22;
-    wire signed [15:0] INPUT_WIRE_23;
-    wire signed [15:0] INPUT_WIRE_24;
-    wire signed [15:0] INPUT_WIRE_25;
-    wire signed [15:0] INPUT_WIRE_26;
-    wire signed [15:0] INPUT_WIRE_27;
-    wire signed [15:0] INPUT_WIRE_28;
-    wire signed [15:0] INPUT_WIRE_29;
-    wire signed [15:0] INPUT_WIRE_30;
-    wire signed [15:0] INPUT_WIRE_31;
-    wire signed [15:0] INPUT_WIRE_32;
-    wire signed [15:0] INPUT_WIRE_33;
-    wire signed [15:0] INPUT_WIRE_34;
-    wire signed [15:0] INPUT_WIRE_35;
-    wire signed [15:0] INPUT_WIRE_36;
-    wire signed [15:0] INPUT_WIRE_37;
-    wire signed [15:0] INPUT_WIRE_38;
-    wire signed [15:0] INPUT_WIRE_39;
-    wire signed [15:0] INPUT_WIRE_40;
-    wire signed [15:0] INPUT_WIRE_41;
-    wire signed [15:0] INPUT_WIRE_42;
-    wire signed [15:0] INPUT_WIRE_43;
-    wire signed [15:0] INPUT_WIRE_44;
-    wire signed [15:0] INPUT_WIRE_45;
-    wire signed [15:0] INPUT_WIRE_46;
-    wire signed [15:0] INPUT_WIRE_47;
-    wire signed [15:0] INPUT_WIRE_48;
-    wire signed [15:0] INPUT_WIRE_49;
+    wire signed [QWIDTH:0] INPUT_WIRE_0;
+    wire signed [QWIDTH:0] INPUT_WIRE_1;
+    wire signed [QWIDTH:0] INPUT_WIRE_2;
+    wire signed [QWIDTH:0] INPUT_WIRE_3;
+    wire signed [QWIDTH:0] INPUT_WIRE_4;
+    wire signed [QWIDTH:0] INPUT_WIRE_5;
+    wire signed [QWIDTH:0] INPUT_WIRE_6;
+    wire signed [QWIDTH:0] INPUT_WIRE_7;
+    wire signed [QWIDTH:0] INPUT_WIRE_8;
+    wire signed [QWIDTH:0] INPUT_WIRE_9;
+    wire signed [QWIDTH:0] INPUT_WIRE_10;
+    wire signed [QWIDTH:0] INPUT_WIRE_11;
+    wire signed [QWIDTH:0] INPUT_WIRE_12;
+    wire signed [QWIDTH:0] INPUT_WIRE_13;
+    wire signed [QWIDTH:0] INPUT_WIRE_14;
+    wire signed [QWIDTH:0] INPUT_WIRE_15;
+    wire signed [QWIDTH:0] INPUT_WIRE_16;
+    wire signed [QWIDTH:0] INPUT_WIRE_17;
+    wire signed [QWIDTH:0] INPUT_WIRE_18;
+    wire signed [QWIDTH:0] INPUT_WIRE_19;
+    wire signed [QWIDTH:0] INPUT_WIRE_20;
+    wire signed [QWIDTH:0] INPUT_WIRE_21;
+    wire signed [QWIDTH:0] INPUT_WIRE_22;
+    wire signed [QWIDTH:0] INPUT_WIRE_23;
+    wire signed [QWIDTH:0] INPUT_WIRE_24;
+    wire signed [QWIDTH:0] INPUT_WIRE_25;
+    wire signed [QWIDTH:0] INPUT_WIRE_26;
+    wire signed [QWIDTH:0] INPUT_WIRE_27;
+    wire signed [QWIDTH:0] INPUT_WIRE_28;
+    wire signed [QWIDTH:0] INPUT_WIRE_29;
+    wire signed [QWIDTH:0] INPUT_WIRE_30;
+    wire signed [QWIDTH:0] INPUT_WIRE_31;
+    wire signed [QWIDTH:0] INPUT_WIRE_32;
+    wire signed [QWIDTH:0] INPUT_WIRE_33;
+    wire signed [QWIDTH:0] INPUT_WIRE_34;
+    wire signed [QWIDTH:0] INPUT_WIRE_35;
+    wire signed [QWIDTH:0] INPUT_WIRE_36;
+    wire signed [QWIDTH:0] INPUT_WIRE_37;
+    wire signed [QWIDTH:0] INPUT_WIRE_38;
+    wire signed [QWIDTH:0] INPUT_WIRE_39;
+    wire signed [QWIDTH:0] INPUT_WIRE_40;
+    wire signed [QWIDTH:0] INPUT_WIRE_41;
+    wire signed [QWIDTH:0] INPUT_WIRE_42;
+    wire signed [QWIDTH:0] INPUT_WIRE_43;
+    wire signed [QWIDTH:0] INPUT_WIRE_44;
+    wire signed [QWIDTH:0] INPUT_WIRE_45;
+    wire signed [QWIDTH:0] INPUT_WIRE_46;
+    wire signed [QWIDTH:0] INPUT_WIRE_47;
+    wire signed [QWIDTH:0] INPUT_WIRE_48;
+    wire signed [QWIDTH:0] INPUT_WIRE_49;
 
-    wire signed [22:0] HIDDEN_WIRE_0;
-    wire signed [22:0] HIDDEN_WIRE_1;
-    wire signed [22:0] HIDDEN_WIRE_2;
-    wire signed [22:0] HIDDEN_WIRE_3;
-    wire signed [22:0] HIDDEN_WIRE_4;
+    wire signed [QWIDTH+7:0] HIDDEN_WIRE_0;
+    wire signed [QWIDTH+7:0] HIDDEN_WIRE_1;
+    wire signed [QWIDTH+7:0] HIDDEN_WIRE_2;
+    wire signed [QWIDTH+7:0] HIDDEN_WIRE_3;
+    wire signed [QWIDTH+7:0] HIDDEN_WIRE_4;
 
     assign INPUT_WIRE_0 = input_0;
     assign INPUT_WIRE_1 = input_1;
@@ -188,7 +188,7 @@ module mlp (
     //  attribute hints the synthesizer to implement this as block RAM
     (* ram_style = "block" *)
     // 25(parameters network) * 261(parameters per network) = 6525
-    reg signed [22:0] parameter_registers [0:6524];
+    reg signed [QWIDTH+7:0] parameter_registers [0:6524];
     // select_region * 261 + address
     wire [12:0] write_addr = (select_region << 8) + (select_region << 2) + 1 + address;
         

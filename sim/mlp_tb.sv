@@ -145,14 +145,15 @@ module mlp_tb;
                 #10;
                 reset = 0;
 
-                // Load the parameters (weights and bias) data from memory files
-                fname = $sformatf("../mem/central_barrel/%s/%s/q15_params_%s_%s.mem", eta, et, et, eta);
-                $readmemb(fname, parameters_input);
-
                 // Load the targets data from memory files
                 fname = $sformatf("../mem/central_barrel/%s/%s/targets_%s_%s.mem", eta, et, et, eta);
                 $readmemb(fname, targets);
 
+                // Load the parameters (weights and bias) data from memory files
+                fname = $sformatf("../mem/central_barrel/%s/%s/q15_params_%s_%s.mem", eta, et, et, eta);
+                $readmemb(fname, parameters_input);
+
+                // Load the software linear results for comparison
                 software_linear_results_file = $fopen($sformatf("../resultados_software/%s/%s/saida_linear_%s_%s.txt", eta, et, et, eta), "r");
                 for (i = 0; i < 20; i++) begin
                     $fscanf(software_linear_results_file, "%f", software_linear_results[i]);
@@ -161,7 +162,8 @@ module mlp_tb;
 
                 #30; 
 
-                // Initialize parameters
+                // Initialize parameters loading process
+                // Load parameters into the MLP module
                 for (i = 0; i <= 260; i++) begin
                     write_parameters = 1;
                     address = i;
