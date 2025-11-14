@@ -191,9 +191,13 @@ module mlp #(
     //  attribute hints the synthesizer to implement this as block RAM
     (* ram_style = "block" *)
     // 25(parameters network) * 261(parameters per network) = 6525
-    reg signed [Q_INTEGER+Q_FRACTIONAL:0] parameter_registers [1:6525];
-    // select_region * 261 + address
-    wire [12:0] write_addr = (select_region << 8) + (select_region << 2) + 1 + address;
+    // note: To accommodate for address calculation, we allocate 6600
+    // memory positions in total (25 * 264) = 6600. In this way, we can
+    // calculate the base address of each region as select_region * 264.
+    // Each region uses 261 parameters, so there will be some unused addresses.
+    reg signed [Q_INTEGER+Q_FRACTIONAL:0] parameter_registers [1:6599];
+    // select_region * 264 + address
+    wire [12:0] write_addr = (select_region << 8) + (select_region << 3) + address;
         
     always @(posedge clock) begin
         if (write_parameters) begin
