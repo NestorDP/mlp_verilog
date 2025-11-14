@@ -113,57 +113,57 @@ module neuron_50in_relu #(
     // Output in Q7.15 format
     output signed [Q_INTEGER+Q_FRACTIONAL:0] out
 );
-    // 50 multipliers in Q7.30 format
-    wire signed [39:0] multi0; 
-    wire signed [39:0] multi1;
-    wire signed [39:0] multi2;
-    wire signed [39:0] multi3;
-    wire signed [39:0] multi4;
-    wire signed [39:0] multi5;
-    wire signed [39:0] multi6;
-    wire signed [39:0] multi7;
-    wire signed [39:0] multi8;
-    wire signed [39:0] multi9;
-    wire signed [39:0] multi10;
-    wire signed [39:0] multi11;
-    wire signed [39:0] multi12;
-    wire signed [39:0] multi13;
-    wire signed [39:0] multi14;
-    wire signed [39:0] multi15;
-    wire signed [39:0] multi16;
-    wire signed [39:0] multi17;
-    wire signed [39:0] multi18;
-    wire signed [39:0] multi19;
-    wire signed [39:0] multi20;
-    wire signed [39:0] multi21;
-    wire signed [39:0] multi22;
-    wire signed [39:0] multi23;
-    wire signed [39:0] multi24;
-    wire signed [39:0] multi25;
-    wire signed [39:0] multi26;
-    wire signed [39:0] multi27;
-    wire signed [39:0] multi28;
-    wire signed [39:0] multi29;
-    wire signed [39:0] multi30;
-    wire signed [39:0] multi31;
-    wire signed [39:0] multi32;
-    wire signed [39:0] multi33;
-    wire signed [39:0] multi34;
-    wire signed [39:0] multi35;
-    wire signed [39:0] multi36;
-    wire signed [39:0] multi37;
-    wire signed [39:0] multi38;
-    wire signed [39:0] multi39;
-    wire signed [39:0] multi40;
-    wire signed [39:0] multi41;
-    wire signed [39:0] multi42;
-    wire signed [39:0] multi43;
-    wire signed [39:0] multi44;
-    wire signed [39:0] multi45;
-    wire signed [39:0] multi46;
-    wire signed [39:0] multi47;
-    wire signed [39:0] multi48;
-    wire signed [39:0] multi49;
+    // 50 multipliers in Q7.30 format + 1 bit from mulltiplications
+    wire signed [38:0] multi0; 
+    wire signed [38:0] multi1;
+    wire signed [38:0] multi2;
+    wire signed [38:0] multi3;
+    wire signed [38:0] multi4;
+    wire signed [38:0] multi5;
+    wire signed [38:0] multi6;
+    wire signed [38:0] multi7;
+    wire signed [38:0] multi8;
+    wire signed [38:0] multi9;
+    wire signed [38:0] multi10;
+    wire signed [38:0] multi11;
+    wire signed [38:0] multi12;
+    wire signed [38:0] multi13;
+    wire signed [38:0] multi14;
+    wire signed [38:0] multi15;
+    wire signed [38:0] multi16;
+    wire signed [38:0] multi17;
+    wire signed [38:0] multi18;
+    wire signed [38:0] multi19;
+    wire signed [38:0] multi20;
+    wire signed [38:0] multi21;
+    wire signed [38:0] multi22;
+    wire signed [38:0] multi23;
+    wire signed [38:0] multi24;
+    wire signed [38:0] multi25;
+    wire signed [38:0] multi26;
+    wire signed [38:0] multi27;
+    wire signed [38:0] multi28;
+    wire signed [38:0] multi29;
+    wire signed [38:0] multi30;
+    wire signed [38:0] multi31;
+    wire signed [38:0] multi32;
+    wire signed [38:0] multi33;
+    wire signed [38:0] multi34;
+    wire signed [38:0] multi35;
+    wire signed [38:0] multi36;
+    wire signed [38:0] multi37;
+    wire signed [38:0] multi38;
+    wire signed [38:0] multi39;
+    wire signed [38:0] multi40;
+    wire signed [38:0] multi41;
+    wire signed [38:0] multi42;
+    wire signed [38:0] multi43;
+    wire signed [38:0] multi44;
+    wire signed [38:0] multi45;
+    wire signed [38:0] multi46;
+    wire signed [38:0] multi47;
+    wire signed [38:0] multi48;
+    wire signed [38:0] multi49;
 
     // Perform the multiplication of the inputs and coefficients
     assign multi0  = input_0  * weight_0;
@@ -224,15 +224,15 @@ module neuron_50in_relu #(
     wire signed [Q_INTEGER+Q_FRACTIONAL:0] output_typeconvert;
 
     //Q7.30 format + 1 bit from mulltiplications
-    wire signed [39:0] sum;
+    wire signed [38:0] sum;
 
-    //Q7.30 format + 1 bit to align with multiplications
+    //Q1.30 format: Q30 + 1 bit to align with results from multiplications
     wire signed [31:0] bias_q15_to_q30;     
 
-    // Shift the bias value left by 15 bits to convert it to Q30
+    // Shift the bias value left by 15 bits to convert it to Q1.30
     assign bias_q15_to_q30 = bias <<< 15;
 
-    // Sum all the multiplications and add the bias converted to Q30
+    // Sum all the multiplications and add the bias converted to Q1.30
     assign sum = multi0 +
                  multi1 +
                  multi2 + 
