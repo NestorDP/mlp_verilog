@@ -7,10 +7,8 @@ module mlp_tb;
     parameter ADDR_SIGNED_WIDTH = 10; // address width
     parameter MULT_WIDTH        = 46; // Width for 'out_mult' signals
     parameter INPUT_DEPTH       = 50; // Size of the 'inputs' array
-
-    parameter Q_FRACTIONAL = 15;
-    parameter Q_INTEGER    = 7;
-
+    parameter Q_FRACTIONAL      = 15;
+    parameter Q_INTEGER         = 7;
     parameter INPUT_WIDTH       = Q_FRACTIONAL + 1; // Width for 'inputs' and 'out'
     parameter PARAM_WIDTH       = 23; // Width for 'parameters' and intermediate 'out_neuron' signals
 
@@ -147,7 +145,7 @@ module mlp_tb;
                 eta = eta_list[eta_idx];
                 et  = et_list[et_idx];
                 $display("----------------------------------------------------------------------");
-                $display("     Output Comparison: Hardware vs. Software for Region [%s] [%s]      ", eta, et);
+                $display("     Output Comparison: Hardware vs. Software for Region [%s] [%s]", eta, et);
                 $display("----------------------------------------------------------------------");
                 $display("            Hardware   Software");
                 // Initialize Inputs
