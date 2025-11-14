@@ -202,7 +202,10 @@ module mlp #(
     end
 
     // Instantiate neuron_50in_relu
-    neuron_50in_relu U1 (
+    neuron_50in_relu # (
+        .Q_FRACTIONAL(Q_FRACTIONAL),
+        .Q_INTEGER(Q_INTEGER)
+    ) U1 (
         .clock(clock),
         .reset(reset),
 
@@ -312,7 +315,10 @@ module mlp #(
         .out(HIDDEN_WIRE_0)
     );
 
-    neuron_50in_relu U2 (
+    neuron_50in_relu # (
+        .Q_FRACTIONAL(Q_FRACTIONAL),
+        .Q_INTEGER(Q_INTEGER)
+    ) U2 (
         .clock(clock),
         .reset(reset),
 
@@ -422,7 +428,10 @@ module mlp #(
         .out(HIDDEN_WIRE_1)
     );
 
-    neuron_50in_relu U3 (
+    neuron_50in_relu # (
+        .Q_FRACTIONAL(Q_FRACTIONAL),
+        .Q_INTEGER(Q_INTEGER)
+    ) U3 (
         .clock(clock),
         .reset(reset),
 
@@ -532,7 +541,10 @@ module mlp #(
         .out(HIDDEN_WIRE_2)
     );
 
-    neuron_50in_relu U4 (
+    neuron_50in_relu # (
+        .Q_FRACTIONAL(Q_FRACTIONAL),
+        .Q_INTEGER(Q_INTEGER)
+    ) U4 (
         .clock(clock),
         .reset(reset),
 
@@ -642,7 +654,10 @@ module mlp #(
         .out(HIDDEN_WIRE_3)
     );
 
-    neuron_50in_relu U5 (
+    neuron_50in_relu # (
+        .Q_FRACTIONAL(Q_FRACTIONAL),
+        .Q_INTEGER(Q_INTEGER)
+    ) U5 (
         .clock(clock),
         .reset(reset),
 
@@ -752,7 +767,10 @@ module mlp #(
         .out(HIDDEN_WIRE_4)
     );
 
-    neuron_5in_sigmoid U6 (
+    neuron_5in_sigmoid # (
+        .Q_FRACTIONAL(Q_FRACTIONAL),
+        .Q_INTEGER(Q_INTEGER)
+    ) U6 (
         .clock(clock),
         .reset(reset),
 

@@ -2,35 +2,50 @@
 
 module mlp_tb;
 
+    // Define Parameters
+    parameter ADDR_WIDTH        = 5;  // select_region width (actually 5 bits uses [4:0])
+    parameter ADDR_SIGNED_WIDTH = 10; // address width
+    parameter MULT_WIDTH        = 46; // Width for 'out_mult' signals
+    parameter INPUT_DEPTH       = 50; // Size of the 'inputs' array
+
+    parameter Q_FRACTIONAL = 15;
+    parameter Q_INTEGER    = 7;
+
+    parameter INPUT_WIDTH       = Q_FRACTIONAL + 1; // Width for 'inputs' and 'out'
+    parameter PARAM_WIDTH       = 23; // Width for 'parameters' and intermediate 'out_neuron' signals
+
     // Inputs
     logic clock;
     logic reset;
 
     logic write_parameters;
-    logic [4:0] select_region;
-    logic signed [9:0] address;
-    logic signed [15:0] inputs [0:49];
-    logic signed [22:0] parameters;
+    logic [ADDR_WIDTH-1:0] select_region;
+    logic signed [ADDR_SIGNED_WIDTH-1:0] address;
+    logic signed [INPUT_WIDTH-1:0] inputs [0:INPUT_DEPTH-1];
+    logic signed [PARAM_WIDTH-1:0] parameters;
 
     // Outputs
-    logic signed [15:0] out;
+    logic signed [INPUT_WIDTH-1:0] out;
 
-    logic signed [22:0] out_neuron_1;
-    logic signed [22:0] out_neuron_2;
-    logic signed [22:0] out_neuron_3;
-    logic signed [22:0] out_neuron_4;
-    logic signed [22:0] out_neuron_5;
+    logic signed [PARAM_WIDTH-1:0] out_neuron_1;
+    logic signed [PARAM_WIDTH-1:0] out_neuron_2;
+    logic signed [PARAM_WIDTH-1:0] out_neuron_3;
+    logic signed [PARAM_WIDTH-1:0] out_neuron_4;
+    logic signed [PARAM_WIDTH-1:0] out_neuron_5;
     
-    logic signed [22:0] out_linear;
+    logic signed [PARAM_WIDTH-1:0] out_linear;
 
-    logic signed [45:0] out_mult0;
-    logic signed [45:0] out_mult1;
-    logic signed [45:0] out_mult2;
-    logic signed [45:0] out_mult3;
-    logic signed [45:0] out_mult4;
+    logic signed [MULT_WIDTH-1:0] out_mult0;
+    logic signed [MULT_WIDTH-1:0] out_mult1;
+    logic signed [MULT_WIDTH-1:0] out_mult2;
+    logic signed [MULT_WIDTH-1:0] out_mult3;
+    logic signed [MULT_WIDTH-1:0] out_mult4;
 
     // Instantiate the Perceptron module
-    mlp uut (
+    mlp  # (
+        .Q_FRACTIONAL(15),
+        .Q_INTEGER(7)
+    ) uut (
         .reset(reset),
         .clock(clock),
 
