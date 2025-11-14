@@ -230,7 +230,7 @@ module neuron_50in_relu #(
     wire signed [1+Q_FRACTIONAL+Q_FRACTIONAL:0] bias_q15_to_q30;     
 
     // Shift the bias value left by 15 bits to convert it to Q1.30
-    assign bias_q15_to_q30 = bias <<< 15;
+    assign bias_q15_to_q30 = bias <<< Q_FRACTIONAL;
 
     // Sum all the multiplications and add the bias converted to Q1.30
     assign sum = multi0 +
@@ -286,7 +286,7 @@ module neuron_50in_relu #(
                  bias_q15_to_q30;
 
     // Convert the sum to Q15 format
-    assign output_typeconvert = sum >>> 15;
+    assign output_typeconvert = sum >>> Q_FRACTIONAL;
 
     always @ (posedge clock or posedge reset)
     begin: Output_Register_process
