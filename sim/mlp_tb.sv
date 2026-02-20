@@ -129,6 +129,8 @@ module mlp_tb;
     string fname;
     string output_file_name;
 
+    real error;
+
 
     // Arrays for eta and et values
     string eta_list [0:1] = '{"eta0", "eta1"};
@@ -147,7 +149,7 @@ module mlp_tb;
                 $display("----------------------------------------------------------------------");
                 $display("     Output Comparison: Hardware vs. Software for Region [%s] [%s]", eta, et);
                 $display("----------------------------------------------------------------------");
-                $display("            Hardware   Software");
+                $display("            Hardware    Software     Error (%%) ");
                 // Initialize Inputs
                 write_parameters = 1;
                 select_region = 0;
@@ -196,10 +198,11 @@ module mlp_tb;
                     $readmemb(fname, inputs);
 
                     #250;
-
+                    error = ((out_linear/32768.0 - software_linear_results[i])/software_linear_results[i])*100.0;
+                    if (error < 0) error = -error; // Take absolute value of error
                     // Display the output
-                    $display("    [%2d]  %10.6f | %8.6f", 
-                            i, out_linear/32768.0, software_linear_results[i]);
+                    $display("    [%2d]  %10.6f | %10.6f | %10.6f ", 
+                            i, out_linear/32768.0, software_linear_results[i], error);
                     $fwrite(output_file,  "%f\n", out_linear/32768.0);
                 end
 
